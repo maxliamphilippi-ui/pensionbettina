@@ -3,109 +3,200 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pension Bettina - Putzdienst Simulator</title>
+  <title>Pension Bettina - Training Simulator</title>
   
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
-    body {
-      background-color: #2D3748;
-      color: white;
-      font-family: 'Courier New', Courier, monospace;
+    /* 1. CORPORATE DESIGN (Berkshire Hathaway Vibe) */
+    :root {
+      --bg-color: #F5F5F0; 
+      --text-color: #000000; 
+      --link-color: #0000EE; 
+      --link-hover: #551A8B; 
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: "Times New Roman", Times, serif; 
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background-image: repeating-linear-gradient(transparent, transparent 49px, #E0E0E0 49px, #E0E0E0 50px);
+      z-index: -1;
+    }
+
+    /* 2. NAVBAR (Exakt wie auf der Startseite) */
+    .navbar {
+      z-index: 1000;
+      background: #FFFFFF !important;
+      border-bottom: 2px solid #000;
+      padding: 10px 0;
+    }
+    .navbar-brand { 
+      font-size: 1.5rem; font-weight: bold; color: #000 !important; 
+      font-family: Arial, sans-serif; letter-spacing: 0px;
+    }
+    .nav-link {
+      color: var(--link-color) !important;
+      text-decoration: underline !important; 
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem; margin: 0 10px;
+    }
+    .nav-link:hover { color: var(--link-hover) !important; }
+
+    /* 3. SPIEL-BEREICH (Zentriert unter dem Menü) */
+    .game-container {
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      margin: 0;
-      overflow: hidden;
+      margin-top: 70px; /* Platz für die Navbar */
     }
 
-    h1 {
+    .game-container h1 {
+      font-family: Arial, sans-serif;
+      font-size: 1.8rem;
+      font-weight: bold;
       margin-bottom: 5px;
-      text-transform: uppercase;
+      border-bottom: 1px solid #000;
+      padding-bottom: 5px;
     }
 
-    p {
-      color: #A0AEC0;
-      margin-top: 0;
-      margin-bottom: 20px;
+    .game-container p {
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 15px;
     }
 
-    /* Der Spielbereich (Holzboden-Optik) */
+    /* Das Spielfeld selbst */
     #gameCanvas {
-      background-color: #D2B48C; 
-      border: 5px solid #1A202C;
-      box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
-      border-radius: 5px;
+      background-color: #FFFFFF; /* Sauberer Büro-Boden */
+      border: 2px solid #000; /* Harter Corporate Rahmen */
+      box-shadow: 4px 4px 0px #000;
     }
 
     .score-board {
-      font-size: 1.5rem;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 1.2rem;
       font-weight: bold;
       margin-top: 15px;
-      color: #D9A05B;
+      background: #000;
+      color: #00FF00; /* Börsen-Grün */
+      padding: 5px 15px;
+      border: 1px solid #000;
     }
 
     .controls-hint {
-      margin-top: 15px;
-      font-size: 0.9rem;
-      color: #718096;
+      margin-top: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      color: #666;
     }
 
-    /* Ein Button zum Neustarten */
+    /* Neustart-Button im System-Look */
     #restartBtn {
       display: none;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #C55A4E;
-      color: white;
-      border: none;
+      margin-top: 15px;
+      padding: 8px 16px;
+      background: #E0E0E0;
+      color: #000;
+      border: 2px solid #000;
       font-weight: bold;
-      font-family: inherit;
+      font-family: Arial, sans-serif;
       cursor: pointer;
-      text-transform: uppercase;
-      border-radius: 4px;
+      box-shadow: 2px 2px 0px #000;
     }
-    #restartBtn:hover { background: #A04035; }
+    #restartBtn:hover {
+      background: #CCCCCC;
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px #000;
+    }
+
+    /* IFRAME-MODUS: Wenn die Seite eingebunden ist, blenden wir Navigation aus */
+    .in-iframe .navbar { display: none !important; }
+    .in-iframe .game-container { margin-top: 0; }
   </style>
 </head>
 <body>
 
-  <h1>WG-Putzdienst Simulator</h1>
-  <p>Steuere den Staubsauger. Pass auf das Kabel auf!</p>
+  <nav class="navbar navbar-expand-lg fixed-top" id="main-nav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">[PROJEKTNAME]</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Startseite</a></li>
+          <li class="nav-item"><a class="nav-link" href="ueber-uns.html">Über uns</a></li>
+          <li class="nav-item"><a class="nav-link" href="veranstaltungen.html">Veranstaltungen</a></li>
+          <li class="nav-item"><a class="nav-link" href="merch.html">Unterstützung</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-  <canvas id="gameCanvas" width="400" height="400"></canvas>
+  <div class="game-container">
+    <h1>TRAINING SIMULATOR</h1>
+    <p>Navigieren Sie das Gerät. Vermeiden Sie Kollisionen mit dem Kabelstrang.</p>
 
-  <div class="score-board">Aufgesaugt: <span id="scoreDisplay">0</span></div>
-  <div class="controls-hint">Steuerung: Pfeiltasten (Tastatur)</div>
-  
-  <button id="restartBtn" onclick="location.reload()">Nochmal Putzen</button>
+    <canvas id="gameCanvas" width="360" height="360"></canvas>
+
+    <div class="score-board">EFFIZIENZ-RATE: <span id="scoreDisplay">0</span></div>
+    <div class="controls-hint">Input: Pfeiltasten (Tastatur)</div>
+    
+    <button id="restartBtn" onclick="location.reload()">System Neustart</button>
+  </div>
+
 
   <script>
+    // 1. IFRAME ERKENNUNG
+    // Prüft, ob das Spiel gerade auf der Startseite im kleinen Fenster läuft
+    if (window.self !== window.top) {
+      document.body.classList.add('in-iframe');
+    }
+
+    // 2. DAS SPIEL (Logik leicht angepasst für Corporate Design)
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
 
-    // Rastergröße und WG-Müll (Emojis)
-    const box = 20;
+    const box = 20; // Größe der Gitterfelder (360px / 20 = 18 Felder)
     const trashItems = ["🧦", "🍕", "☁️", "🕷️", "🍺"];
     let currentTrash = getRandomTrash();
 
     let score = 0;
     
-    // Der Staubsauger (Schlange) - Startposition
+    // Startposition
     let vacuum = [];
-    vacuum[0] = { x: 9 * box, y: 10 * box };
+    vacuum[0] = { x: 9 * box, y: 9 * box };
 
-    // Start-Müll
     let food = {
-      x: Math.floor(Math.random() * 19 + 1) * box,
-      y: Math.floor(Math.random() * 19 + 1) * box
+      x: Math.floor(Math.random() * 17) * box,
+      y: Math.floor(Math.random() * 17) * box
     };
 
-    // Bewegungsrichtung
     let d;
-    let nextD; // Verhindert, dass man sich selbst frisst, wenn man zu schnell tippt
+    let nextD; 
 
+    // Tastatur-Steuerung aktivieren
     document.addEventListener("keydown", direction);
+
+    // Pfeiltasten ignorieren beim Scrollen der Seite (wichtig für die Nutzbarkeit im iframe!)
+    window.addEventListener("keydown", function(e) {
+      if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+          e.preventDefault();
+      }
+    }, false);
 
     function direction(event) {
       if (event.keyCode == 37 && d != "RIGHT") nextD = "LEFT";
@@ -118,89 +209,73 @@
       return trashItems[Math.floor(Math.random() * trashItems.length)];
     }
 
-    // Die Haupt-Spielschleife
     function draw() {
-      // 1. Hintergrund (WG-Boden) leeren
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Bewegungsrichtung aktualisieren
       d = nextD;
 
-      // 2. Den Staubsauger und das Kabel zeichnen
       for (let i = 0; i < vacuum.length; i++) {
         if (i === 0) {
-          // Staubsauger-Kopf
-          ctx.fillStyle = "#E53E3E"; // Roter Staubsauger
+          // Kopf (Roter Block im Corporate Style)
+          ctx.fillStyle = "#CC0000"; 
           ctx.fillRect(vacuum[i].x, vacuum[i].y, box, box);
-          // Kleines Detail für den Kopf
-          ctx.fillStyle = "#1A202C";
-          ctx.fillRect(vacuum[i].x + 4, vacuum[i].y + 4, box - 8, box - 8);
+          ctx.fillStyle = "#000000";
+          ctx.strokeRect(vacuum[i].x, vacuum[i].y, box, box);
         } else {
-          // Staubsauger-Kabel (Tail)
-          ctx.fillStyle = "#4A5568"; // Graues Kabel
-          ctx.beginPath();
-          ctx.arc(vacuum[i].x + box/2, vacuum[i].y + box/2, box/2 - 2, 0, Math.PI * 2);
-          ctx.fill();
+          // Kabel (Schwarze Quadrate)
+          ctx.fillStyle = "#333333"; 
+          ctx.fillRect(vacuum[i].x + 2, vacuum[i].y + 2, box - 4, box - 4);
         }
       }
 
-      // 3. Den Müll (Food) zeichnen
-      ctx.font = "18px Arial";
-      ctx.fillText(currentTrash, food.x + 1, food.y + 16);
+      ctx.font = "16px Arial";
+      ctx.fillText(currentTrash, food.x + 2, food.y + 15);
 
-      // 4. Alte Kopf-Position merken
       let vacuumX = vacuum[0].x;
       let vacuumY = vacuum[0].y;
 
-      // 5. In die gewählte Richtung bewegen
       if (d == "LEFT") vacuumX -= box;
       if (d == "UP") vacuumY -= box;
       if (d == "RIGHT") vacuumX += box;
       if (d == "DOWN") vacuumY += box;
 
-      // 6. Hat der Staubsauger Müll aufgesaugt?
       if (vacuumX == food.x && vacuumY == food.y) {
         score++;
         document.getElementById("scoreDisplay").innerText = score;
         currentTrash = getRandomTrash();
         food = {
-          x: Math.floor(Math.random() * 19 + 1) * box,
-          y: Math.floor(Math.random() * 19 + 1) * box
+          x: Math.floor(Math.random() * 17) * box,
+          y: Math.floor(Math.random() * 17) * box
         };
-        // Wir entfernen das Ende des Kabels nicht, dadurch wächst es!
       } else {
-        // Normal weiterbewegen: Das Ende des Kabels nachziehen
         vacuum.pop();
       }
 
-      // Neuer Kopf
       let newHead = { x: vacuumX, y: vacuumY };
 
-      // 7. GAME OVER Regeln (Wand oder eigenes Kabel getroffen)
+      // GAME OVER
       if (vacuumX < 0 || vacuumX >= canvas.width || vacuumY < 0 || vacuumY >= canvas.height || collision(newHead, vacuum)) {
         clearInterval(game);
         
-        // Game Over Text
-        ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+        ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.fillStyle = "#FFF";
-        ctx.font = "bold 30px Courier New";
+        ctx.fillStyle = "#CC0000";
+        ctx.font = "bold 24px Arial";
         ctx.textAlign = "center";
-        ctx.fillText("KABEL SALAT!", canvas.width / 2, canvas.height / 2);
+        ctx.fillText("SYSTEMFEHLER", canvas.width / 2, canvas.height / 2 - 10);
         
-        ctx.font = "15px Courier New";
-        ctx.fillText("Putzdienst nicht bestanden.", canvas.width / 2, canvas.height / 2 + 30);
+        ctx.fillStyle = "#000000";
+        ctx.font = "14px Courier New";
+        ctx.fillText("Effizienz ungenügend.", canvas.width / 2, canvas.height / 2 + 15);
         
         document.getElementById("restartBtn").style.display = "block";
         return;
       }
 
-      // Neuen Kopf vorne anfügen
       vacuum.unshift(newHead);
     }
 
-    // Prüft, ob der Kopf das eigene Kabel trifft
     function collision(head, array) {
       for (let i = 0; i < array.length; i++) {
         if (head.x == array[i].x && head.y == array[i].y) {
@@ -210,7 +285,6 @@
       return false;
     }
 
-    // Startet das Spiel (alle 120 Millisekunden wird das Bild neu gezeichnet)
     let game = setInterval(draw, 120);
 
   </script>
