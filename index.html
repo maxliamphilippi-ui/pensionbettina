@@ -71,10 +71,11 @@
     }
     .nav-link:hover { color: var(--link-hover) !important; }
 
-    .marquee-container {
-      position: fixed; top: 60px; width: 100%; background: #000; color: #00FF00; /* Börsen-Grün auf Schwarz */
-      border-bottom: var(--border-thick); overflow: hidden; white-space: nowrap; z-index: 900; padding: 5px 0;
-      font-family: "Courier New", Courier, monospace; font-weight: bold; font-size: 0.9rem;
+<div class="marquee-container">
+    <div class="marquee-text" id="live-ticker">
+      Verbinde zum WG-Börsenterminal... Lade Aktienkurse...
+    </div>
+  </div>
     }
     .marquee-text {
       display: inline-block; animation: scroll-left 30s linear infinite;
@@ -156,6 +157,18 @@
     /* Standard Bilder-Ansicht */
     .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 1.5rem; }
     .brutal-img { width: 100%; height: auto; border: 1px solid #000; }
+
+    <section id="cleaning">
+    <div class="content-box reveal" style="max-width: 650px; text-align: center;">
+      <h1>Department of Cleaning</h1>
+      <h2>Standort: WG Flur | Interaktives Training</h2>
+      <p>Bevor Sie in die Pension Bettina investieren oder einziehen können, müssen Sie den offiziellen Putz-Simulator absolvieren. Vorsicht vor dem Kabelsalat!</p>
+      
+      <div style="border: 3px solid #000; margin-top: 20px; background: #2D3748; padding: 10px;">
+        <iframe src="cleaning.html" width="420" height="420" style="border: none; overflow: hidden;" scrolling="no" title="Putzplan Simulator"></iframe>
+      </div>
+    </div>
+  </section>
 
     /* =========================================
        6. FAQ & FOOTER (Corporate Style)
@@ -344,3 +357,40 @@
   </script>
 </body>
 </html>
+
+// 4. LIVE BÖRSEN-TICKER (Simulator)
+    // Startwerte (ungefähr) für deine Wunsch-Aktien
+    const stocks = [
+      { name: "AAPL", price: 182.50, change: 0 },
+      { name: "BYD", price: 34.20, change: 0 },
+      { name: "TSM", price: 139.80, change: 0 },
+      { name: "AMZN", price: 174.10, change: 0 },
+      { name: "OMV.VI", price: 42.60, change: 0 },
+      { name: "PENSION BETTINA", price: 1000.00, change: 5.4 } // Ein kleiner WG-Scherz
+    ];
+
+    function updateTicker() {
+      let tickerString = "";
+      
+      stocks.forEach(stock => {
+        // Kleine, realistische Schwankungen berechnen (-0.5% bis +0.5%)
+        let volatility = (Math.random() * 1 - 0.5);
+        stock.price = stock.price * (1 + volatility / 100);
+        stock.change += volatility;
+
+        // Farben und Pfeile bestimmen
+        let color = stock.change >= 0 ? "#00FF00" : "#FF3333"; // Grün oder Rot
+        let arrow = stock.change >= 0 ? "▲" : "▼";
+        let sign = stock.change >= 0 ? "+" : "";
+
+        // Text zusammenbauen (Name in Weiß, Werte in Farbe)
+        tickerString += `<span style="color: #FFFFFF">${stock.name}</span> <span style="color: ${color}">${stock.price.toFixed(2)} ${arrow} ${sign}${stock.change.toFixed(2)}%</span> &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; `;
+      });
+
+      // Den Text zweimal aneinanderhängen, damit das Laufband nie abbricht
+      document.getElementById('live-ticker').innerHTML = tickerString + tickerString + tickerString;
+    }
+
+    // Sofort einmal ausführen und dann alle 2 Sekunden aktualisieren
+    updateTicker();
+    setInterval(updateTicker, 2000);
