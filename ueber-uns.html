@@ -3,51 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Über uns - Pension Bettina</title>
+  <title>Pension Bettina - Board of Directors</title>
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* 1. CORPORATE DESIGN CSS */
+    :root {
+      --bg-color: #F5F5F0; 
+      --text-color: #000000; 
+      --link-color: #0000EE; 
+      --link-hover: #551A8B; 
+    }
+
+    body, html {
+      margin: 0; padding: 0;
+      background-color: var(--bg-color) !important;
+      color: var(--text-color);
+      font-family: "Times New Roman", Times, serif; 
+      scroll-behavior: smooth;
+    }
+
+    body::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background-image: repeating-linear-gradient(transparent, transparent 49px, #E0E0E0 49px, #E0E0E0 50px);
+      z-index: -1;
+    }
+
+    /* 2. NAVBAR */
+    .navbar {
+      z-index: 1000; background: #FFFFFF !important;
+      border-bottom: 2px solid #000; padding: 10px 0;
+    }
+    .navbar-brand { 
+      font-size: 1.5rem; font-weight: bold; color: #000 !important; 
+      font-family: Arial, sans-serif;
+    }
+    .nav-link {
+      color: var(--link-color) !important; text-decoration: underline !important; 
+      font-family: Arial, sans-serif; font-size: 0.9rem; margin: 0 10px;
+    }
+    .nav-link:hover { color: var(--link-hover) !important; }
+
+    /* 3. CONTENT BOXES */
+    .page-container {
+      padding: 100px 10% 50px 10%;
+      display: flex; flex-direction: column; align-items: center; gap: 40px;
+    }
+
+    .content-box {
+      background: #FFFFFF; color: #000; padding: 2rem; border: 1px solid #000;
+      box-shadow: 2px 2px 0px #000; width: 100%; max-width: 800px;
+    }
+
+    .content-box h1 { font-size: 2.2rem; font-weight: bold; margin-bottom: 5px; border-bottom: 1px solid #000; padding-bottom: 5px; }
+    .content-box h2 { font-size: 1rem; color: #333; font-family: Arial, sans-serif; margin-bottom: 1.5rem; font-weight: normal; }
+    .content-box p { font-size: 1.1rem; line-height: 1.6; }
+
+    /* 4. TEAM GRID */
+    .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 1.5rem; }
+    .profile-card { border: 1px solid #000; padding: 10px; background: #F9F9F9; text-align: center; font-family: Arial, sans-serif; }
+    .profile-card img { width: 100%; height: auto; border: 1px solid #000; margin-bottom: 10px; filter: grayscale(100%); }
+    .profile-card strong { display: block; font-size: 1.1rem; }
+    .profile-card span { font-size: 0.85rem; color: #666; }
+
+    /* 5. FOOTER */
+    .brutal-footer {
+      background: #FFFFFF; color: #000; padding: 40px 5%; border-top: 3px double #000;
+      text-align: center; font-family: Arial, sans-serif; margin-top: 50px;
+    }
+    .footer-huge-text { font-size: 2rem; font-weight: bold; margin-bottom: 10px; font-family: "Times New Roman", serif; text-transform: uppercase; }
+    .footer-links { margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; }
+    .footer-links a { color: var(--link-color); text-decoration: underline; }
+  </style>
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="index.html">🏡 Pension Bettina</a>
+      <a class="navbar-brand" href="index.html">PENSION BETTINA INC.</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="index.html">Startseite</a></li>
-          <li class="nav-item"><a class="nav-link active" href="ueber-uns.html">Über uns</a></li>
+          <li class="nav-item"><a class="nav-link" href="ueber-uns.html">Die BewohnerInnen</a></li>
           <li class="nav-item"><a class="nav-link" href="veranstaltungen.html">Veranstaltungen</a></li>
-          <li class="nav-item"><a class="nav-link" href="merch.html">Merch</a></li>
+          <li class="nav-item"><a class="nav-link" href="merch.html">Unterstützung</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <div class="container mt-5">
-    <h2>Wer wir sind</h2>
-    <hr>
-    <div class="row mt-4">
-      <div class="col-md-8">
-        <p>Die Pension Bettina ist mehr als nur ein Ort zum Schlafen. Wir sind eine Gemeinschaft aus bunten Menschen, die sich entschieden haben, ihren Lebensraum solidarisch und kreativ zu teilen.</p>
-        <p>Wir organisieren uns basisdemokratisch, teilen Aufgaben auf und kochen (meistens) fantastisch zusammen.</p>
-      </div>
-      <div class="col-md-4">
-        <div class="card text-bg-light mb-3">
-          <div class="card-header">Unsere Werte</div>
-          <div class="card-body">
-            <ul>
-              <li>Solidarität</li>
-              <li>Nachhaltigkeit</li>
-              <li>DIY-Kultur</li>
-              <li>Gemeinschaft</li>
-            </ul>
-          </div>
+  <div class="page-container">
+    <div class="content-box">
+      <h1>Unternehmensstruktur & Governance</h1>
+      <h2>Abteilung: Organisation und Basisdemokratie</h2>
+      <p>Die Pension Bettina ist kein klassisches Mietverhältnis, sondern ein Zusammenschluss autonom agierender Stakeholder. Wir organisieren uns basisdemokratisch, teilen Aufgaben nach dem Solidaritätsprinzip auf und verwalten unsere Immobilienwerte gemeinschaftlich.</p>
+      <p>Entscheidungen werden im "Hausplenum" (unserem Board-Meeting) nach dem Konsensprinzip getroffen. Dies garantiert eine 100%ige Einbindung aller Shareholder in die strategische Ausrichtung unseres Zusammenlebens.</p>
+    </div>
+
+    <div class="content-box">
+      <h1>Board of Directors</h1>
+      <h2>Übersicht der verantwortlichen Akteure (Die WG)</h2>
+      
+      <div class="image-grid">
+        <div class="profile-card">
+          <img src="https://picsum.photos/300/300?random=1" alt="Profil">
+          <strong>Bewohner 1</strong>
+          <span>Chief Gardening Officer (Gartenbau)</span>
+        </div>
+        <div class="profile-card">
+          <img src="https://picsum.photos/300/300?random=2" alt="Profil">
+          <strong>Bewohner 2</strong>
+          <span>Head of Culinary Arts (KüFa)</span>
+        </div>
+        <div class="profile-card">
+          <img src="https://picsum.photos/300/300?random=3" alt="Profil">
+          <strong>Bewohner 3</strong>
+          <span>Lead Technician (Werkstatt)</span>
+        </div>
+        <div class="profile-card">
+          <img src="https://picsum.photos/300/300?random=4" alt="Profil">
+          <strong>WG Hund</strong>
+          <span>Head of Security & Morale</span>
         </div>
       </div>
     </div>
   </div>
+
+  <footer class="brutal-footer">
+    <div class="footer-huge-text">PENSION BETTINA INC.</div>
+    <div style="font-size: 0.85rem; color: #666;">Ein solidarisches Wohnprojekt. Kein Verkauf von Aktien möglich.</div>
+    
+    <div class="footer-links">
+      <a href="mailto:hallo@pension-bettina.at">Kontakt (E-Mail)</a>
+      <a href="#">Impressum & Haftungsausschluss</a>
+      <a href="#">Broschüre zu Direktkrediten (PDF)</a>
+      <a href="https://finance.yahoo.com" target="_blank">Live-Kurse (Investor Relations)</a>
+    </div>
+    <p style="margin-top: 30px; font-size: 0.8rem; color: #999;">© 2026 Pension Bettina. All rights reserved.</p>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
