@@ -6,41 +6,78 @@
   <title>Pension Bettina - Wohnprojekt</title>
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* GRUNDEINSTELLUNGEN & STERNENHIMMEL */
+    /* GRUNDEINSTELLUNGEN: Brutalismus (Schwarz/Weiß/Neon) */
     body, html {
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle at top, #1b2735 0%, #090a0f 100%) !important;
-      color: white;
+      background-color: #0a0a0a !important; /* Tiefes Schwarz */
+      color: #fff;
+      font-family: 'Syne', sans-serif;
       overflow-x: hidden; 
       scroll-behavior: smooth;
     }
 
+    /* Rohes Raster im Hintergrund statt Sternenhimmel */
     body::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background-image: 
-        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
-        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
-        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
-      background-size: 550px 550px, 350px 350px, 250px 250px;
-      background-position: 0 0, 40px 60px, 130px 270px;
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 50px 50px;
       z-index: -1;
     }
 
+    /* NAVBAR BRUTAL */
     .navbar {
       z-index: 1000;
-      background: rgba(33, 37, 41, 0.9) !important;
-      backdrop-filter: blur(10px);
+      background: #fff !important;
+      border-bottom: 4px solid #000;
+    }
+    .navbar-brand, .nav-link {
+      color: #000 !important;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .nav-link:hover {
+      background: #ccff00; /* Neon-Gelb */
+      color: #000 !important;
     }
 
-    /* DIE DONAU ALS PFAD */
+    /* LOCOMOTIVE MARQUEE (Durchlaufender Text) */
+    .marquee-container {
+      position: fixed;
+      top: 56px; /* Direkt unter der Navbar */
+      width: 100%;
+      background: #ccff00; /* Textmarker-Gelb */
+      border-bottom: 4px solid #000;
+      overflow: hidden;
+      white-space: nowrap;
+      z-index: 900;
+      padding: 5px 0;
+    }
+    .marquee-text {
+      display: inline-block;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #000;
+      text-transform: uppercase;
+      animation: scroll-left 15s linear infinite;
+    }
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* DIE PUNK-DONAU */
     .donau-container {
       position: absolute;
-      top: 56px; 
+      top: 100px; 
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
@@ -49,37 +86,28 @@
       z-index: 0;
       pointer-events: none;
     }
-
     .donau-fluss {
       fill: none;
-      stroke: #0f52ba;
-      stroke-width: 60;
-      stroke-linecap: round;
-      filter: drop-shadow(0 0 30px #00a8ff) drop-shadow(0 0 10px #00a8ff);
-      opacity: 0.6;
+      stroke: #ff007f; /* Neon-Pink */
+      stroke-width: 25;
+      stroke-linecap: square;
+      stroke-dasharray: 40 40; /* Gestrichelte Linie wie auf einer Schatzkarte */
     }
 
-    /* ---------------------------------------------------
-       DIE NEUE ANIMIERTE FIGUR (Der Flug-Container)
-       --------------------------------------------------- */
+    /* DER FLUG-CONTAINER (Startet jetzt tiefer wegen Marquee) */
     .flug-objekt {
       position: fixed;
-      top: 56px;
+      top: 100px;
       left: 0;
       z-index: 100;
-      /* Der unsichtbare Pfad für die Scroll-Animation */
       offset-path: path("M 200,0 C 800,800 100,1600 500,2400 C 900,3200 300,4000 600,4800 C 800,5600 200,6400 500,7200");
       offset-rotate: auto 90deg; 
       animation: fliegen auto linear;
       animation-timeline: scroll(root block);
     }
+    @keyframes fliegen { 0% { offset-distance: 0%; } 100% { offset-distance: 100%; } }
 
-    @keyframes fliegen {
-      0% { offset-distance: 0%; }
-      100% { offset-distance: 100%; }
-    }
-
-    /* Der 3D-Wackel-Effekt für die Transportmittel */
+    /* 3D-EMOJIS */
     .ikonen-3d {
       position: relative;
       display: flex;
@@ -88,45 +116,26 @@
       width: 80px; 
       height: 80px;
       transform-style: preserve-3d;
-      animation: wackeln3d 1.5s infinite alternate ease-in-out;
+      animation: wackeln3d 1s infinite alternate ease-in-out;
     }
-
-    /* Pseudo-3D Raum-Verzerrung und Schwebe-Schatten */
     @keyframes wackeln3d {
-      0% { 
-        transform: perspective(300px) rotateY(-30deg) rotateX(15deg) scale(1); 
-        filter: drop-shadow(4px 10px 5px rgba(0, 0, 0, 0.6)); 
-      }
-      100% { 
-        transform: perspective(300px) rotateY(30deg) rotateX(-15deg) scale(1.1); 
-        filter: drop-shadow(-4px 20px 10px rgba(0, 0, 0, 0.3)); 
-      }
+      0% { transform: perspective(300px) rotateY(-20deg) scale(1); filter: drop-shadow(4px 10px 0px #ccff00); }
+      100% { transform: perspective(300px) rotateY(20deg) scale(1.2); filter: drop-shadow(-4px 10px 0px #00ffff); }
     }
-
-    /* Alle Emojis liegen exakt übereinander, sind aber unsichtbar (opacity 0) */
-    .emoji {
-      position: absolute;
-      font-size: 3.5rem;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* WANN welches Emoji durchs Scrollen sichtbar wird */
+    .emoji { position: absolute; font-size: 4.5rem; opacity: 0; pointer-events: none; }
     .e-fahrrad   { animation: show-1 auto; animation-timeline: scroll(root block); }
     .e-elefant   { animation: show-2 auto; animation-timeline: scroll(root block); }
     .e-wandern   { animation: show-3 auto; animation-timeline: scroll(root block); }
     .e-klettern1 { animation: show-4 auto; animation-timeline: scroll(root block); }
     .e-klettern2 { animation: show-5 auto; animation-timeline: scroll(root block); }
 
-    /* Die Scroll-Prozente (aufgeteilt auf 6 Sektionen) */
     @keyframes show-1 { 0%, 19.9% { opacity: 1; } 20%, 100% { opacity: 0; } }
     @keyframes show-2 { 0%, 19.9% { opacity: 0; } 20%, 39.9% { opacity: 1; } 40%, 100% { opacity: 0; } }
     @keyframes show-3 { 0%, 39.9% { opacity: 0; } 40%, 59.9% { opacity: 1; } 60%, 100% { opacity: 0; } }
     @keyframes show-4 { 0%, 59.9% { opacity: 0; } 60%, 79.9% { opacity: 1; } 80%, 100% { opacity: 0; } }
     @keyframes show-5 { 0%, 79.9% { opacity: 0; } 80%, 100% { opacity: 1; } }
-    /* --------------------------------------------------- */
 
-    /* SEKTIONEN UND BOXEN */
+    /* SEKTIONEN UND MRAZ-BOXEN (Brutalismus) */
     section {
       position: relative;
       height: 100vh; 
@@ -136,60 +145,91 @@
       padding: 0 10%;
       z-index: 10;
     }
-
     section:nth-child(odd) { align-items: flex-start; }
     section:nth-child(even) { align-items: flex-end; }
 
     .content-box {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
+      background: #fff;
+      color: #000;
       padding: 3rem;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-      max-width: 450px;
-      transition: transform 0.3s ease;
+      border: 5px solid #000;
+      border-radius: 0; /* Keine weichen Ecken mehr! */
+      box-shadow: 12px 12px 0px #ff007f; /* Harter Punk-Schatten */
+      max-width: 500px;
+      transform: rotate(-2deg); /* Leicht schief aufgeklebt */
+      transition: all 0.2s ease;
     }
-
+    section:nth-child(even) .content-box {
+      transform: rotate(3deg);
+      box-shadow: -12px 12px 0px #00ffff; /* Abwechselnde Farben */
+    }
     .content-box:hover {
-      transform: translateY(-10px);
-      border-color: rgba(0, 168, 255, 0.5);
+      transform: scale(1.05) rotate(0deg);
+      box-shadow: 0px 0px 0px #000;
     }
 
-    .content-box h1 { font-size: 2.5rem; margin-top: 0; color: #00a8ff; text-transform: uppercase; letter-spacing: 2px; }
-    .content-box h2 { font-size: 1.2rem; color: #a4b0be; margin-bottom: 1.5rem; }
-    .content-box p { font-size: 1.1rem; line-height: 1.6; color: #dfe4ea; }
+    /* RIESIGE TYPOGRAFIE */
+    .content-box h1 { 
+      font-size: 3.5rem; 
+      font-weight: 800;
+      line-height: 1;
+      margin-top: 0; 
+      color: #000; 
+      text-transform: uppercase; 
+      letter-spacing: -2px; /* Typisch für Locomotive */
+    }
+    .content-box h2 { 
+      font-size: 1.2rem; 
+      background: #000;
+      color: #fff;
+      display: inline-block;
+      padding: 5px 10px;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem; 
+      text-transform: uppercase;
+    }
+    .content-box p { 
+      font-size: 1.2rem; 
+      font-family: sans-serif; /* Lesbarer Kontrast zur Überschrift */
+      font-weight: bold;
+      line-height: 1.4; 
+    }
 
+    /* BRUTALE BUTTONS */
     .btn-fancy {
       display: inline-block;
-      margin-top: 1rem;
-      padding: 10px 25px;
-      background: linear-gradient(45deg, #00a8ff, #0f52ba);
-      color: white;
+      margin-top: 1.5rem;
+      padding: 15px 30px;
+      background: #000;
+      color: #ccff00;
       text-decoration: none;
-      border-radius: 30px;
-      font-weight: bold;
-      transition: box-shadow 0.3s ease;
-      border: none;
+      font-weight: 900;
+      text-transform: uppercase;
+      border: 3px solid #000;
+      transition: all 0.2s;
     }
+    .btn-fancy:hover { 
+      background: #ccff00; 
+      color: #000; 
+      box-shadow: 6px 6px 0px #000;
+      transform: translate(-3px, -3px);
+    }
+    .btn-insta { background: #ff007f; color: #fff; }
+    .btn-insta:hover { background: #000; color: #ff007f; }
 
-    .btn-fancy:hover { box-shadow: 0 0 20px #00a8ff; color: white; }
-    .btn-insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-    .btn-insta:hover { box-shadow: 0 0 20px #dc2743; }
   </style>
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="index.html">🏡 Pension Bettina</a>
+      <a class="navbar-brand" href="index.html">PENSION BETTINA</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Startseite</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Startseite</a></li>
           <li class="nav-item"><a class="nav-link" href="ueber-uns.html">Die BewohnerInnen</a></li>
           <li class="nav-item"><a class="nav-link" href="veranstaltungen.html">Veranstaltungen</a></li>
           <li class="nav-item"><a class="nav-link" href="merch.html">Merch</a></li>
@@ -197,6 +237,12 @@
       </div>
     </div>
   </nav>
+
+  <div class="marquee-container">
+    <div class="marquee-text">
+      +++ PENSION BETTINA +++ SOLIDARISCHES WOHNPROJEKT +++ GEMEINSAM LEBEN UND FEIERN +++ PENSION BETTINA +++ SOLIDARISCHES WOHNPROJEKT +++ GEMEINSAM LEBEN UND FEIERN +++ PENSION BETTINA +++ SOLIDARISCHES WOHNPROJEKT +++ GEMEINSAM LEBEN UND FEIERN +++ 
+    </div>
+  </div>
 
   <div class="flug-objekt">
     <div class="ikonen-3d">
@@ -214,54 +260,54 @@
 
   <section id="start">
     <div class="content-box">
-      <h1>Startseite</h1>
-      <h2>📍 Kahlenberg - Der Überblick</h2>
+      <h1>Start<br>Schuss</h1>
+      <h2>📍 Kahlenberg</h2>
       <p>Hier startet unsere Reise. Von ganz oben blicken wir auf Wien hinab. Das Wohnprojekt "Pension Bettina" hebt ab. Willkommen an Bord!</p>
-      <a href="#bewohner" class="btn-fancy">Scroll nach unten ↓</a>
+      <a href="#bewohner" class="btn-fancy">Scroll Runter</a>
     </div>
   </section>
 
   <section id="bewohner">
     <div class="content-box">
-      <h1>Die BewohnerInnen</h1>
-      <h2>📍 Donauinsel - Der Treffpunkt</h2>
-      <p>Ein bunter Haufen, der sich hier am Wasser sammelt, um gemeinsam Utopien zu bauen. Wir teilen uns Aufgaben, grillen zusammen und gestalten solidarischen Wohnraum.</p>
+      <h1>Die Crew</h1>
+      <h2>📍 Donauinsel</h2>
+      <p>Ein bunter Haufen, der sich hier am Wasser sammelt, um gemeinsam Utopien zu bauen. Wir teilen Aufgaben, grillen und gestalten solidarischen Wohnraum.</p>
       <a href="ueber-uns.html" class="btn-fancy">Mehr über uns</a>
     </div>
   </section>
 
   <section id="veranstaltungen">
     <div class="content-box">
-      <h1>Veranstaltungen</h1>
-      <h2>📍 Donaukanal - Das urbane Leben</h2>
-      <p>KüFas (Küche für alle), kleine Akustik-Konzerte und offene Hausplena. Hier pulsiert das Leben unserer Gemeinschaft, direkt am Puls der Stadt.</p>
-      <a href="veranstaltungen.html" class="btn-fancy">Zum Kalender</a>
+      <h1>Live & Laut</h1>
+      <h2>📍 Donaukanal</h2>
+      <p>KüFas, kleine Akustik-Konzerte und offene Hausplena. Hier pulsiert das Leben unserer Gemeinschaft, direkt am Puls der Stadt.</p>
+      <a href="veranstaltungen.html" class="btn-fancy">Kalender</a>
     </div>
   </section>
 
   <section id="merch">
     <div class="content-box">
-      <h1>Merch & Support</h1>
-      <h2>📍 Lobau - Die wilde Wurzel</h2>
-      <p>Unterstütze uns! Kauf dir ein Soli-Shirt, Bio-Becher oder Sticker-Packs. Mit deinem Support wächst unser Projekt wie der wilde Dschungel der Lobau.</p>
+      <h1>Support</h1>
+      <h2>📍 Lobau</h2>
+      <p>Kauf dir ein Soli-Shirt, Bio-Becher oder Sticker-Packs. Mit deinem Support wächst unser Projekt wie der wilde Dschungel der Lobau.</p>
       <a href="merch.html" class="btn-fancy">Zum Shop</a>
     </div>
   </section>
 
   <section id="schmecktbeibettina">
     <div class="content-box">
-      <h1>Schmeckt bei Bettina</h1>
-      <h2>📍 Alte Donau - Die Freiluftküche</h2>
-      <p>Kochen ist bei uns mehr als nur Nahrungsaufnahme. Vom veganen Sonntagsbrunch über das Einwecken von Gemüse bis zum legendären WG-Dinner – Liebe geht durch den Magen.</p>
-      <a href="https://www.instagram.com/schmecktbeibettina" target="_blank" class="btn-fancy btn-insta">Folge uns auf Instagram</a>
+      <h1>Guten<br>Appetit</h1>
+      <h2>📍 Alte Donau</h2>
+      <p>Kochen ist mehr als Nahrungsaufnahme. Vom veganen Brunch über das Einwecken von Gemüse bis zum legendären WG-Dinner – Liebe geht durch den Magen.</p>
+      <a href="https://www.instagram.com/schmecktbeibettina" target="_blank" class="btn-fancy btn-insta">Instagram</a>
     </div>
   </section>
 
   <section id="bettinagoes">
     <div class="content-box">
-      <h1>Bettina goes...</h1>
-      <h2>📍 Hafen Freudenau - Das Tor zur Welt</h2>
-      <p>Manchmal müssen wir auch mal raus aus der Stadt. Ob WG-Urlaub in den Bergen, Soli-Fahrten zu befreundeten Hausprojekten oder spontane Camping-Trips. Die Pension Bettina ist überall zu Hause!</p>
+      <h1>Auf Tour</h1>
+      <h2>📍 Hafen Freudenau</h2>
+      <p>WG-Urlaub in den Bergen, Soli-Fahrten zu befreundeten Projekten oder spontane Camping-Trips. Die Pension Bettina ist überall zu Hause!</p>
     </div>
   </section>
 
