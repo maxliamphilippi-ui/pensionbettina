@@ -3,52 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Veranstaltungen - Pension Bettina</title>
+  <title>Pension Bettina - Corporate Events</title>
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* 1. CORPORATE DESIGN CSS */
+    :root {
+      --bg-color: #F5F5F0; 
+      --text-color: #000000; 
+      --link-color: #0000EE; 
+      --link-hover: #551A8B; 
+    }
+
+    body, html {
+      margin: 0; padding: 0;
+      background-color: var(--bg-color) !important;
+      color: var(--text-color);
+      font-family: "Times New Roman", Times, serif; 
+      scroll-behavior: smooth;
+    }
+
+    body::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background-image: repeating-linear-gradient(transparent, transparent 49px, #E0E0E0 49px, #E0E0E0 50px);
+      z-index: -1;
+    }
+
+    /* 2. NAVBAR */
+    .navbar {
+      z-index: 1000; background: #FFFFFF !important;
+      border-bottom: 2px solid #000; padding: 10px 0;
+    }
+    .navbar-brand { 
+      font-size: 1.5rem; font-weight: bold; color: #000 !important; 
+      font-family: Arial, sans-serif;
+    }
+    .nav-link {
+      color: var(--link-color) !important; text-decoration: underline !important; 
+      font-family: Arial, sans-serif; font-size: 0.9rem; margin: 0 10px;
+    }
+    .nav-link:hover { color: var(--link-hover) !important; }
+
+    /* 3. CONTENT BOXES */
+    .page-container {
+      padding: 100px 10% 50px 10%;
+      display: flex; flex-direction: column; align-items: center; gap: 40px;
+    }
+
+    .content-box {
+      background: #FFFFFF; color: #000; padding: 2rem; border: 1px solid #000;
+      box-shadow: 2px 2px 0px #000; width: 100%; max-width: 800px;
+    }
+
+    .content-box h1 { font-size: 2.2rem; font-weight: bold; margin-bottom: 5px; border-bottom: 1px solid #000; padding-bottom: 5px; }
+    .content-box h2 { font-size: 1rem; color: #333; font-family: Arial, sans-serif; margin-bottom: 1.5rem; font-weight: normal; }
+    .content-box p { font-size: 1.1rem; line-height: 1.6; }
+
+    /* 4. EVENT LISTE (Kalender Optik) */
+    .event-list { list-style: none; padding: 0; margin-top: 20px; font-family: Arial, sans-serif; }
+    .event-item { 
+      border-bottom: 1px solid #CCC; padding: 15px 0; 
+      display: flex; flex-direction: column;
+    }
+    .event-item:last-child { border-bottom: none; }
+    .event-date { font-weight: bold; color: #CC0000; margin-bottom: 5px; }
+    .event-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; }
+    .event-desc { font-size: 0.95rem; color: #555; }
+
+    /* 5. FOOTER */
+    .brutal-footer {
+      background: #FFFFFF; color: #000; padding: 40px 5%; border-top: 3px double #000;
+      text-align: center; font-family: Arial, sans-serif; margin-top: 50px;
+    }
+    .footer-huge-text { font-size: 2rem; font-weight: bold; margin-bottom: 10px; font-family: "Times New Roman", serif; text-transform: uppercase; }
+    .footer-links { margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; }
+    .footer-links a { color: var(--link-color); text-decoration: underline; }
+  </style>
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="index.html">🏡 Pension Bettina</a>
+      <a class="navbar-brand" href="index.html">PENSION BETTINA INC.</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="index.html">Startseite</a></li>
-          <li class="nav-item"><a class="nav-link" href="ueber-uns.html">Über uns</a></li>
-          <li class="nav-item"><a class="nav-link active" href="veranstaltungen.html">Veranstaltungen</a></li>
-          <li class="nav-item"><a class="nav-link" href="merch.html">Merch</a></li>
+          <li class="nav-item"><a class="nav-link" href="ueber-uns.html">Die BewohnerInnen</a></li>
+          <li class="nav-item"><a class="nav-link" href="veranstaltungen.html">Veranstaltungen</a></li>
+          <li class="nav-item"><a class="nav-link" href="merch.html">Unterstützung</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <div class="container mt-5">
-    <h2>Anstehende Veranstaltungen</h2>
-    <hr>
-    <div class="row mt-4">
-      <div class="col-md-6 mb-4">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Frühlingsfest im Garten</h5>
-            <h6 class="card-subtitle mb-2 text-muted">20. Mai 2026 | 15:00 Uhr</h6>
-            <p class="card-text">Wir feiern den Frühling! Bringt etwas fürs Buffet mit. Es gibt Live-Musik und kalte Getränke.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-4">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Offenes Haus-Plenum</h5>
-            <h6 class="card-subtitle mb-2 text-muted">05. Juni 2026 | 19:00 Uhr</h6>
-            <p class="card-text">Interessiert an unserem Projekt? Kommt vorbei, lernt uns kennen und stellt eure Fragen.</p>
-          </div>
-        </div>
-      </div>
+  <div class="page-container">
+    <div class="content-box">
+      <h1>Event-Kalender Q2/Q3</h1>
+      <h2>Übersicht der öffentlichen Unternehmensaktivitäten</h2>
+      <p>Die Pension Bettina agiert als offener Hub für Nachbarschafts-Stakeholder. Wir laden hiermit offiziell zu unseren anstehenden "Jahreshauptversammlungen" in Form von Konzerten, KüFas und Werkstätten ein.</p>
+      
+      <ul class="event-list">
+        <li class="event-item">
+          <span class="event-date">📅 20. Mai 2026 | 15:00 Uhr</span>
+          <span class="event-title">Frühlingsfest im Garten (Networking-Event)</span>
+          <span class="event-desc">Wir feiern den Frühling! Bringt etwas fürs Buffet mit. Es gibt Live-Musik, kalte Getränke und die Möglichkeit, unser operatives Geschäft kennenzulernen.</span>
+        </li>
+        <li class="event-item">
+          <span class="event-date">📅 05. Juni 2026 | 19:00 Uhr</span>
+          <span class="event-title">Offenes Haus-Plenum (Townhall Meeting)</span>
+          <span class="event-desc">Interessiert an unserem Projekt? Kommt vorbei, werft einen Blick in unsere Struktur und stellt eure Fragen direkt an das Board of Directors.</span>
+        </li>
+        <li class="event-item">
+          <span class="event-date">📅 15. Juni 2026 | 14:00 Uhr</span>
+          <span class="event-title">Reparatur-Workshop: Fahrräder (Skill-Sharing)</span>
+          <span class="event-desc">Wir öffnen unsere Werkstatt. Repariert eure Zweiräder unter fachkundiger Anleitung unserer Techniker. Materialkosten werden solidarisch umgelegt.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content-box">
+      <h1>Externe Engagements</h1>
+      <h2>Pension Bettina goes...</h2>
+      <p>Manchmal verlegen wir unsere operativen Tätigkeiten auch nach draußen. Ob Teambuilding-Maßnahmen (WG-Urlaub) in den Bergen oder Soli-Fahrten zu befreundeten Hausprojekten im In- und Ausland. Die Pension Bettina bleibt mobil.</p>
     </div>
   </div>
+
+  <footer class="brutal-footer">
+    <div class="footer-huge-text">PENSION BETTINA INC.</div>
+    <div style="font-size: 0.85rem; color: #666;">Ein solidarisches Wohnprojekt. Kein Verkauf von Aktien möglich.</div>
+    
+    <div class="footer-links">
+      <a href="mailto:hallo@pension-bettina.at">Kontakt (E-Mail)</a>
+      <a href="#">Impressum & Haftungsausschluss</a>
+      <a href="#">Broschüre zu Direktkrediten (PDF)</a>
+      <a href="https://finance.yahoo.com" target="_blank">Live-Kurse (Investor Relations)</a>
+    </div>
+    <p style="margin-top: 30px; font-size: 0.8rem; color: #999;">© 2026 Pension Bettina. All rights reserved.</p>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
