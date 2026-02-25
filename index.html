@@ -4,11 +4,163 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pension Bettina - Wohnprojekt</title>
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* Hintergrund und Grundeinstellungen (mit !important, damit Bootstrap es nicht überschreibt) */
+    body, html {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #1b2735 0%, #090a0f 100%) !important;
+      color: white;
+      overflow-x: hidden; 
+      scroll-behavior: smooth;
+    }
+
+    /* Sternenhimmel */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+      background-size: 550px 550px, 350px 350px, 250px 250px;
+      background-position: 0 0, 40px 60px, 130px 270px;
+      z-index: -1;
+    }
+
+    /* Das Menü ganz oben fixieren */
+    .navbar {
+      z-index: 1000;
+      background: rgba(33, 37, 41, 0.9) !important; /* Leicht transparentes Schwarz */
+      backdrop-filter: blur(10px);
+    }
+
+    /* Die Donau als SVG-Pfad */
+    .donau-container {
+      position: absolute;
+      top: 56px; /* Startet unter dem Menü */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 1200px;
+      height: 600vh; 
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .donau-fluss {
+      fill: none;
+      stroke: #0f52ba;
+      stroke-width: 60;
+      stroke-linecap: round;
+      filter: drop-shadow(0 0 30px #00a8ff) drop-shadow(0 0 10px #00a8ff);
+      opacity: 0.6;
+    }
+
+    /* Die Rakete */
+    .rakete {
+      position: fixed;
+      top: 56px; /* Startet unter dem Menü */
+      left: 0;
+      font-size: 4rem;
+      z-index: 100;
+      offset-path: path("M 200,0 C 800,800 100,1600 500,2400 C 900,3200 300,4000 600,4800 C 800,5600 200,6400 500,7200");
+      offset-rotate: auto 90deg; 
+      animation: fliegen auto linear;
+      animation-timeline: scroll(root block);
+    }
+
+    @keyframes fliegen {
+      0% { offset-distance: 0%; }
+      100% { offset-distance: 100%; }
+    }
+
+    /* Die Sub-Websites (Sektionen) */
+    section {
+      position: relative;
+      height: 100vh; 
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 10%;
+      z-index: 10;
+    }
+
+    section:nth-child(odd) { align-items: flex-start; }
+    section:nth-child(even) { align-items: flex-end; }
+
+    /* Glassmorphismus Info-Boxen */
+    .content-box {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      padding: 3rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      max-width: 450px;
+      transition: transform 0.3s ease;
+    }
+
+    .content-box:hover {
+      transform: translateY(-10px);
+      border-color: rgba(0, 168, 255, 0.5);
+    }
+
+    .content-box h1 {
+      font-size: 2.5rem;
+      margin-top: 0;
+      color: #00a8ff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .content-box h2 {
+      font-size: 1.2rem;
+      color: #a4b0be;
+      margin-bottom: 1.5rem;
+    }
+
+    .content-box p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #dfe4ea;
+    }
+
+    .btn-fancy {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 10px 25px;
+      background: linear-gradient(45deg, #00a8ff, #0f52ba);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: box-shadow 0.3s ease;
+      border: none;
+    }
+
+    .btn-fancy:hover {
+      box-shadow: 0 0 20px #00a8ff;
+      color: white;
+    }
+
+    .btn-insta {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+
+    .btn-insta:hover {
+      box-shadow: 0 0 20px #dc2743;
+    }
+  </style>
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="index.html">🏡 Pension Bettina</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -17,7 +169,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link active" href="index.html">Startseite</a></li>
-          <li class="nav-item"><a class="nav-link" href="ueber-uns.html">Über uns</a></li>
+          <li class="nav-item"><a class="nav-link" href="ueber-uns.html">Die BewohnerInnen</a></li>
           <li class="nav-item"><a class="nav-link" href="veranstaltungen.html">Veranstaltungen</a></li>
           <li class="nav-item"><a class="nav-link" href="merch.html">Merch</a></li>
         </ul>
@@ -25,11 +177,64 @@
     </div>
   </nav>
 
-  <div class="container mt-5 text-center">
-    <h1 class="display-4">Willkommen in der Pension Bettina!</h1>
-    <p class="lead mt-3">Unser Wohnprojekt: Gemeinsam leben, gestalten und feiern.</p>
-    <a href="ueber-uns.html" class="btn btn-primary btn-lg mt-3">Lerne uns kennen</a>
-  </div>
+  <div class="rakete">🚀</div>
+
+  <svg class="donau-container" viewBox="0 0 1000 7200" preserveAspectRatio="none">
+    <path class="donau-fluss" d="M 200,0 C 800,800 100,1600 500,2400 C 900,3200 300,4000 600,4800 C 800,5600 200,6400 500,7200" />
+  </svg>
+
+  <section id="start">
+    <div class="content-box">
+      <h1>Startseite</h1>
+      <h2>📍 Kahlenberg - Der Überblick</h2>
+      <p>Hier startet unsere Reise. Von ganz oben blicken wir auf Wien hinab. Das Wohnprojekt "Pension Bettina" hebt ab. Willkommen an Bord!</p>
+      <a href="#bewohner" class="btn-fancy">Scroll nach unten ↓</a>
+    </div>
+  </section>
+
+  <section id="bewohner">
+    <div class="content-box">
+      <h1>Die BewohnerInnen</h1>
+      <h2>📍 Donauinsel - Der Treffpunkt</h2>
+      <p>Ein bunter Haufen, der sich hier am Wasser sammelt, um gemeinsam Utopien zu bauen. Wir teilen uns Aufgaben, grillen zusammen und gestalten solidarischen Wohnraum.</p>
+      <a href="ueber-uns.html" class="btn-fancy">Mehr über uns</a>
+    </div>
+  </section>
+
+  <section id="veranstaltungen">
+    <div class="content-box">
+      <h1>Veranstaltungen</h1>
+      <h2>📍 Donaukanal - Das urbane Leben</h2>
+      <p>KüFas (Küche für alle), kleine Akustik-Konzerte und offene Hausplena. Hier pulsiert das Leben unserer Gemeinschaft, direkt am Puls der Stadt.</p>
+      <a href="veranstaltungen.html" class="btn-fancy">Zum Kalender</a>
+    </div>
+  </section>
+
+  <section id="merch">
+    <div class="content-box">
+      <h1>Merch & Support</h1>
+      <h2>📍 Lobau - Die wilde Wurzel</h2>
+      <p>Unterstütze uns! Kauf dir ein Soli-Shirt, Bio-Becher oder Sticker-Packs. Mit deinem Support wächst unser Projekt wie der wilde Dschungel der Lobau.</p>
+      <a href="merch.html" class="btn-fancy">Zum Shop</a>
+    </div>
+  </section>
+
+  <section id="schmecktbeibettina">
+    <div class="content-box">
+      <h1>Schmeckt bei Bettina</h1>
+      <h2>📍 Alte Donau - Die Freiluftküche</h2>
+      <p>Kochen ist bei uns mehr als nur Nahrungsaufnahme. Vom veganen Sonntagsbrunch über das Einwecken von Gemüse bis zum legendären WG-Dinner – Liebe geht durch den Magen.</p>
+      <a href="https://www.instagram.com/schmecktbeibettina" target="_blank" class="btn-fancy btn-insta">Folge uns auf Instagram</a>
+    </div>
+  </section>
+
+  <section id="bettinagoes">
+    <div class="content-box">
+      <h1>Bettina goes...</h1>
+      <h2>📍 Hafen Freudenau - Das Tor zur Welt</h2>
+      <p>Manchmal müssen wir auch mal raus aus der Stadt. Ob WG-Urlaub in den Bergen, Soli-Fahrten zu befreundeten Hausprojekten oder spontane Camping-Trips. Die Pension Bettina ist überall zu Hause!</p>
+    </div>
+  </section>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
