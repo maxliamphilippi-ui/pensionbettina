@@ -3,30 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[Projektname] - Offizielle Website</title>
+  <title>Pension Bettina - Corporate Portal</title>
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    /* =========================================
-       1. CSS VARIABLEN & GRUNDEINSTELLUNGEN
-       ========================================= */
+    /* 1. CORPORATE DESIGN CSS */
     :root {
       --bg-color: #F5F5F0; 
       --text-color: #000000; 
       --link-color: #0000EE; 
       --link-hover: #551A8B; 
-      --border-thick: 1px solid #A0A0A0; 
     }
 
     body, html {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background-color: var(--bg-color) !important;
       color: var(--text-color);
       font-family: "Times New Roman", Times, serif; 
-      overflow-x: hidden; 
-      scroll-behavior: smooth;
+      overflow-x: hidden; scroll-behavior: smooth;
     }
 
     body::before {
@@ -35,69 +30,71 @@
       z-index: -1;
     }
 
-    /* =========================================
-       2. PRELOADER
-       ========================================= */
-    #preloader {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: #FFFFFF; z-index: 99999; display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      transition: opacity 0.5s ease;
-      font-family: "Courier New", Courier, monospace;
-    }
-    #preloader.hide { opacity: 0; pointer-events: none; }
-    .loading-text { font-size: 1.2rem; font-weight: bold; color: #000; }
-
-    /* =========================================
-       3. NAVBAR & MARQUEE
-       ========================================= */
+    /* 2. NAVBAR */
     .navbar {
-      z-index: 1000;
-      background: #FFFFFF !important;
-      border-bottom: 2px solid #000;
-      padding: 10px 0;
+      z-index: 1000; background: #FFFFFF !important;
+      border-bottom: 2px solid #000; padding: 10px 0;
     }
-    .navbar-brand { 
-      font-size: 1.5rem; font-weight: bold; color: #000 !important; 
-      font-family: Arial, sans-serif; letter-spacing: 0px;
-    }
-    .nav-link {
-      color: var(--link-color) !important;
-      text-decoration: underline !important; 
-      font-family: Arial, sans-serif;
-      font-size: 0.9rem; margin: 0 10px;
-    }
+    .navbar-brand { font-size: 1.5rem; font-weight: bold; color: #000 !important; font-family: Arial, sans-serif; }
+    .nav-link { color: var(--link-color) !important; text-decoration: underline !important; font-family: Arial, sans-serif; font-size: 0.9rem; margin: 0 10px; }
     .nav-link:hover { color: var(--link-hover) !important; }
 
+    /* 3. MARQUEE (Börsenticker) */
     .marquee-container {
       position: fixed; top: 60px; width: 100%; background: #000; color: #00FF00;
-      border-bottom: var(--border-thick); overflow: hidden; white-space: nowrap; z-index: 900; padding: 5px 0;
+      border-bottom: 1px solid #A0A0A0; overflow: hidden; white-space: nowrap; z-index: 900; padding: 5px 0;
       font-family: "Courier New", Courier, monospace; font-weight: bold; font-size: 0.9rem;
     }
-    .marquee-text {
-      display: inline-block; animation: scroll-left 30s linear infinite;
-    }
+    .marquee-text { display: inline-block; animation: scroll-left 30s linear infinite; }
     @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    /* =========================================
-       4. ANIMATIONEN & 3D EMOJI
-       ========================================= */
-    .donau-container {
-      position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
-      width: 100%; max-width: 1200px; height: 800vh; z-index: 0; pointer-events: none;
-    }
-    .donau-fluss {
-      fill: none; stroke: #CCCCCC; 
-      stroke-width: 2; stroke-linecap: square; stroke-dasharray: 10 10;
+    /* 4. DASHBOARD & BOXEN (Übersichtliches Layout) */
+    .page-container {
+      padding: 120px 5% 50px 5%;
+      max-width: 1000px; margin: 0 auto;
+      position: relative; z-index: 10;
     }
 
+    .executive-summary {
+      background: #FFFFFF; padding: 2rem; border: 1px solid #000;
+      box-shadow: 2px 2px 0px #000; margin-bottom: 30px;
+    }
+    .executive-summary h1 { font-size: 2.2rem; font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px; }
+    .executive-summary p { font-size: 1.1rem; line-height: 1.5; }
+
+    /* Das Raster für die Abteilungen */
+    .dashboard-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
+    }
+    .dept-card {
+      background: #FFFFFF; border: 1px solid #000; padding: 1.5rem;
+      box-shadow: 2px 2px 0px #000; transition: transform 0.2s;
+    }
+    .dept-card:hover { transform: translateY(-3px); }
+    .dept-card h3 { font-size: 1.3rem; font-weight: bold; margin-bottom: 10px; font-family: Arial, sans-serif; }
+    .dept-card p { font-size: 1rem; color: #333; margin-bottom: 15px; min-height: 60px; }
+    
+    .btn-fancy {
+      display: inline-block; color: var(--link-color); text-decoration: underline;
+      font-family: Arial, sans-serif; font-size: 1rem; cursor: pointer;
+    }
+
+    /* 5. FOOTER */
+    .brutal-footer {
+      background: #FFFFFF; color: #000; padding: 40px 5%; border-top: 3px double #000;
+      text-align: center; font-family: Arial, sans-serif; margin-top: 50px; position: relative; z-index: 10;
+    }
+    .footer-huge-text { font-size: 2rem; font-weight: bold; margin-bottom: 10px; font-family: "Times New Roman", serif; text-transform: uppercase; }
+    .footer-links { margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; }
+    .footer-links a { color: var(--link-color); text-decoration: underline; }
+
+    /* 6. DIE 3D-RAKETE (Fliegt im Hintergrund) */
     .flug-objekt {
-      position: fixed; top: 100px; left: 0; z-index: 100;
-      offset-path: path("M 200,0 C 800,800 100,1600 500,2400 C 900,3200 300,4000 600,4800 C 800,5600 200,6400 500,7200 C 900,8000 100,8800 500,9600");
+      position: fixed; top: 100px; left: 0; z-index: 1;
+      offset-path: path("M 200,0 C 800,800 100,1600 500,2400 C 900,3200 300,4000 600,4800");
       offset-rotate: auto 90deg; animation: fliegen auto linear; animation-timeline: scroll(root block);
     }
     @keyframes fliegen { 0% { offset-distance: 0%; } 100% { offset-distance: 100%; } }
-
     .ikonen-3d {
       position: relative; display: flex; justify-content: center; align-items: center; width: 60px; height: 60px;
       transform-style: preserve-3d; animation: wackeln3d 2s infinite alternate ease-in-out;
@@ -106,206 +103,91 @@
       0% { transform: perspective(300px) rotateY(-15deg) scale(1); filter: drop-shadow(2px 5px 2px rgba(0,0,0,0.2)); }
       100% { transform: perspective(300px) rotateY(15deg) scale(1.1); filter: drop-shadow(-2px 5px 2px rgba(0,0,0,0.2)); }
     }
-    .emoji { position: absolute; font-size: 3rem; opacity: 0; pointer-events: none; }
-    
+    .emoji { position: absolute; font-size: 3rem; opacity: 0; }
     .e-fahrrad   { animation: show-1 auto; animation-timeline: scroll(root block); }
     .e-elefant   { animation: show-2 auto; animation-timeline: scroll(root block); }
-    .e-wandern   { animation: show-3 auto; animation-timeline: scroll(root block); }
-    .e-klettern1 { animation: show-4 auto; animation-timeline: scroll(root block); }
-    .e-klettern2 { animation: show-5 auto; animation-timeline: scroll(root block); }
-
-    @keyframes show-1 { 0%, 19.9% { opacity: 1; } 20%, 100% { opacity: 0; } }
-    @keyframes show-2 { 0%, 19.9% { opacity: 0; } 20%, 39.9% { opacity: 1; } 40%, 100% { opacity: 0; } }
-    @keyframes show-3 { 0%, 39.9% { opacity: 0; } 40%, 59.9% { opacity: 1; } 60%, 100% { opacity: 0; } }
-    @keyframes show-4 { 0%, 59.9% { opacity: 0; } 60%, 79.9% { opacity: 1; } 80%, 100% { opacity: 0; } }
-    @keyframes show-5 { 0%, 79.9% { opacity: 0; } 80%, 100% { opacity: 1; } }
-
-    /* =========================================
-       5. SECTIONS & CONTENT BOXES
-       ========================================= */
-    section {
-      position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
-      padding: 100px 10%; z-index: 10;
-    }
-    section:nth-child(odd) { align-items: flex-start; }
-    section:nth-child(even) { align-items: flex-end; }
-
-    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-
-    .content-box {
-      background: #FFFFFF; color: #000; padding: 2rem; border: 1px solid #000;
-      box-shadow: 2px 2px 0px #000; 
-      max-width: 600px; transition: all 0.2s ease;
-    }
-
-    .content-box h1 { font-size: 2.2rem; font-weight: bold; margin-bottom: 5px; border-bottom: 1px solid #000; padding-bottom: 5px; }
-    .content-box h2 { font-size: 1rem; color: #333; font-family: Arial, sans-serif; margin-bottom: 1.5rem; font-weight: normal; }
-    .content-box p { font-size: 1.1rem; line-height: 1.5; }
-
-    .btn-fancy {
-      display: inline-block; margin-top: 1rem; color: var(--link-color); text-decoration: underline;
-      font-weight: normal; font-size: 1.1rem; cursor: pointer; font-family: Arial, sans-serif;
-    }
-    .btn-fancy:hover { color: var(--link-hover); }
-
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 1.5rem; }
-    .brutal-img { width: 100%; height: auto; border: 1px solid #000; }
-
-    /* =========================================
-       6. FAQ & FOOTER
-       ========================================= */
-    .faq-container { margin-top: 1.5rem; border-top: 1px solid #000; }
-    .faq-item { border-bottom: 1px solid #000; }
-    .faq-question { padding: 10px 0; font-weight: bold; cursor: pointer; color: var(--link-color); text-decoration: underline; }
-    .faq-answer { padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-size: 1rem; color: #333; }
-    .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 10px; }
-
-    .brutal-footer {
-      background: #FFFFFF; color: #000; padding: 40px 5%; border-top: 3px double #000;
-      text-align: center; font-family: Arial, sans-serif;
-    }
-    .footer-huge-text { font-size: 2rem; font-weight: bold; margin-bottom: 10px; font-family: "Times New Roman", serif; text-transform: uppercase; }
-    .footer-links { margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; }
-    .footer-links a { color: var(--link-color); text-decoration: underline; }
+    @keyframes show-1 { 0%, 49.9% { opacity: 1; } 50%, 100% { opacity: 0; } }
+    @keyframes show-2 { 0%, 49.9% { opacity: 0; } 50%, 100% { opacity: 1; } }
   </style>
 </head>
 <body>
 
-  <div id="preloader">
-    <div class="loading-text">Initialisiere Daten... Bitte warten.</div>
-  </div>
-
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="index.html">[PROJEKTNAME]</a>
+      <a class="navbar-brand" href="index.html">PENSION BETTINA INC.</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Startseite</a></li>
-          <li class="nav-item"><a class="nav-link" href="ueber-uns.html">Über uns</a></li>
-          <li class="nav-item"><a class="nav-link" href="veranstaltungen.html">Veranstaltungen</a></li>
-          <li class="nav-item"><a class="nav-link" href="merch.html">Unterstützung</a></li>
+          <li class="nav-item"><a class="nav-link" style="font-weight: bold;" href="index.html">Startseite</a></li>
+          <li class="nav-item"><a class="nav-link" href="ueber-uns.html">Board (Team)</a></li>
+          <li class="nav-item"><a class="nav-link" href="veranstaltungen.html">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="merch.html">Bettindex</a></li>
+          <li class="nav-item"><a class="nav-link" href="schmecktbeibettina.html">Kulinarik</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
   <div class="marquee-container">
-    <div class="marquee-text" id="live-ticker">
-      Lade Marktdaten...
-    </div>
+    <div class="marquee-text" id="live-ticker">Initialisiere Marktdaten...</div>
   </div>
 
   <div class="flug-objekt">
     <div class="ikonen-3d">
       <span class="emoji e-fahrrad">🚲</span>
       <span class="emoji e-elefant">🐘</span>
-      <span class="emoji e-wandern">🥾</span>
-      <span class="emoji e-klettern1">🧗‍♂️</span>
-      <span class="emoji e-klettern2">🧗‍♀️</span>
     </div>
   </div>
 
-  <svg class="donau-container" viewBox="0 0 1000 9600" preserveAspectRatio="none">
-    <path class="donau-fluss" d="M 200,0 C 800,800 100,1600 500,2400 C 900,3200 300,4000 600,4800 C 800,5600 200,6400 500,7200 C 900,8000 100,8800 500,9600" />
-  </svg>
-
-  <section id="start">
-    <div class="content-box reveal">
-      <h1>[Überschrift: Vision / Zusammenfassung]</h1>
-      <h2>[Unterüberschrift: Standort oder Kurzbeschreibung]</h2>
-      <p>[Hier steht ein einleitender Text über euer Projekt. Beschreibt kurz eure Ziele, eure Struktur und warum dieses Projekt existiert.]</p>
-      <a href="#bewohner" class="btn-fancy">Mehr erfahren</a>
+  <div class="page-container">
+    
+    <div class="executive-summary">
+      <h1>Executive Summary</h1>
+      <p>Willkommen im Hauptquartier der <strong>Pension Bettina Inc.</strong> <br>Wir restrukturieren die Stadt von unten. Unser solidarisches Wohnprojekt operiert profitfrei, erzielt aber kontinuierlich Höchstwerte im sozialen Return on Investment (ROI). Bitte wählen Sie die gewünschte Fachabteilung aus dem untenstehenden Verzeichnis.</p>
     </div>
-  </section>
 
-  <section id="bewohner">
-    <div class="content-box reveal">
-      <h1>[Überschrift: Das Team / Die Gemeinschaft]</h1>
-      <h2>[Unterüberschrift: Rechtsform oder Organisation]</h2>
-      <p>[Hier beschreibt ihr die Menschen hinter dem Projekt. Wie ist die Gruppe zusammengesetzt, wie organisiert ihr euch (z.B. Plena, Konsens) und welche Werte vertretet ihr.]</p>
+    <div class="dashboard-grid">
       
-      <div class="image-grid">
-        <img src="https://picsum.photos/300/200?random=1" alt="Platzhalter Bild 1" class="brutal-img">
-        <img src="https://picsum.photos/300/200?random=2" alt="Platzhalter Bild 2" class="brutal-img">
+      <div class="dept-card">
+        <h3>👥 Board of Directors</h3>
+        <p>Übersicht der verantwortlichen Stakeholder, Bewohner und unsere basisdemokratische Haus-Governance.</p>
+        <a href="ueber-uns.html" class="btn-fancy">Verzeichnis öffnen</a>
       </div>
-      
-      <a href="ueber-uns.html" class="btn-fancy">Vollständige Informationen ansehen</a>
-    </div>
-  </section>
 
-  <section id="veranstaltungen">
-    <div class="content-box reveal">
-      <h1>[Überschrift: Termine & Events]</h1>
-      <h2>[Unterüberschrift: Offene Veranstaltungen]</h2>
-      <p>[Hier könnt ihr erklären, inwiefern euer Hausprojekt in die Nachbarschaft wirkt. Erwähnt regelmäßige Treffen, offene Werkstätten oder Informationsveranstaltungen.]</p>
-      
-      <ul style="font-family: Arial, sans-serif; font-size: 0.95rem; margin-top: 15px;">
-        <li><strong>[TT. Monat JJJJ]:</strong> [Titel Veranstaltung 1]</li>
-        <li><strong>[TT. Monat JJJJ]:</strong> [Titel Veranstaltung 2]</li>
-        <li><strong>[TT. Monat JJJJ]:</strong> [Titel Veranstaltung 3]</li>
-      </ul>
-
-      <a href="veranstaltungen.html" class="btn-fancy">Zum vollständigen Kalender</a>
-    </div>
-  </section>
-
-  <section id="merch">
-    <div class="content-box reveal">
-      <h1>[Überschrift: Finanzierung & Unterstützung]</h1>
-      <h2>[Unterüberschrift: Direktkredite & Solidarbeiträge]</h2>
-      <p>[Erklärt hier kurz, wie sich das Projekt finanziert. Informationen zu Direktkrediten, Spendenmöglichkeiten oder dem Erwerb von Soli-Artikeln können hier platziert werden.]</p>
-      
-      <ul style="font-family: Arial, sans-serif; font-size: 0.95rem;">
-        <li>[Artikel / Unterstützungsmöglichkeit 1] - [Betrag]</li>
-        <li>[Artikel / Unterstützungsmöglichkeit 2] - [Betrag]</li>
-      </ul>
-
-      <a href="merch.html" class="btn-fancy">Weitere Details zur Unterstützung</a>
-    </div>
-  </section>
-
-  <section id="cleaning">
-    <div class="content-box reveal" style="max-width: 650px; text-align: center;">
-      <h1>[Überschrift: Interaktives Modul]</h1>
-      <h2>[Unterüberschrift: Beschreibung des Moduls]</h2>
-      <p>[Ein kurzer Einleitungstext, der erklärt, warum hier ein interaktives Element zu finden ist.]</p>
-      
-      <div style="border: 3px solid #000; margin-top: 20px; background: #2D3748; padding: 10px;">
-        <iframe src="cleaning.html" width="420" height="420" style="border: none; overflow: hidden;" scrolling="no" title="Interaktives Modul"></iframe>
+      <div class="dept-card">
+        <h3>📅 Corporate Events</h3>
+        <p>Jahreshauptversammlungen in Form von Konzerten, offenen Plena und Werkstatt-Terminen.</p>
+        <a href="veranstaltungen.html" class="btn-fancy">Kalender prüfen</a>
       </div>
-    </div>
-  </section>
 
-  <section id="faq">
-    <div class="content-box reveal">
-      <h1>[Überschrift: Häufige Fragen (FAQ)]</h1>
-      <h2>[Unterüberschrift: Wichtige Informationen]</h2>
-      <p>[Ein kurzer Satz, der dazu aufruft, diese Liste vor einer Kontaktaufnahme durchzulesen.]</p>
-      
-      <div class="faq-container">
-        <div class="faq-item">
-          <div class="faq-question">[Platzhalter Frage 1]</div>
-          <div class="faq-answer">[Platzhalter Antwort 1. Hier könnt ihr ausführlich auf die Frage eingehen.]</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">[Platzhalter Frage 2]</div>
-          <div class="faq-answer">[Platzhalter Antwort 2. Hier könnt ihr ausführlich auf die Frage eingehen.]</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">[Platzhalter Frage 3]</div>
-          <div class="faq-answer">[Platzhalter Antwort 3. Hier könnt ihr ausführlich auf die Frage eingehen.]</div>
+      <div class="dept-card">
+        <h3>📈 Der Bettindex (Trading)</h3>
+        <p>Unsere Finanzabteilung. Erwerben Sie Liquid Assets (Merch) oder spekulieren Sie auf WG-Ereignisse.</p>
+        <a href="merch.html" class="btn-fancy">Handelsplatz betreten</a>
+      </div>
+
+      <div class="dept-card">
+        <h3>🍳 Culinary Affairs</h3>
+        <p>Ressourcenbeschaffung und Nahrungszubereitung. Offizielle Dokumentation unserer WG-Dinner.</p>
+        <a href="schmecktbeibettina.html" class="btn-fancy">Speiseplan ansehen</a>
+      </div>
+
+      <div class="dept-card" style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center; text-align: center; background: #E8E8E8;">
+        <h3>🧹 Compliance Training (Putzdienst)</h3>
+        <p>Obligatorische Sicherheitsunterweisung für alle Aktionäre und Bewohner. Vorsicht Kabelsalat.</p>
+        <div style="border: 2px solid #000; background: #2D3748; padding: 5px; width: 374px;">
+          <iframe src="cleaning.html" width="360" height="360" style="border: none; overflow: hidden;" scrolling="no" title="Interaktives Modul"></iframe>
         </div>
       </div>
-    </div>
-  </section>
 
-  <footer class="brutal-footer reveal">
-    <div class="footer-huge-text">[PROJEKTNAME]</div>
-    <div style="font-size: 0.85rem; color: #666;">[Kurzer Claim oder Projektbeschreibungssatz]</div>
+    </div>
+  </div>
+
+  <footer class="brutal-footer">
+    <div class="footer-huge-text">PENSION BETTINA INC.</div>
+    <div style="font-size: 0.85rem; color: #666;">Ein solidarisches Wohnprojekt. Kein Verkauf von Aktien möglich.</div>
     
     <div class="footer-links">
       <a href="mailto:hallo@pension-bettina.at">Kontakt (E-Mail)</a>
@@ -313,72 +195,34 @@
       <a href="#">Broschüre zu Direktkrediten (PDF)</a>
       <a href="https://finance.yahoo.com" target="_blank">Live-Kurse (Investor Relations)</a>
     </div>
-
-    <p style="margin-top: 30px; font-size: 0.8rem; color: #999;">© 2026 [Projektname]. Alle Rechte vorbehalten.</p>
+    <p style="margin-top: 30px; font-size: 0.8rem; color: #999;">© 2026 Pension Bettina. All rights reserved.</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // 1. PRELOADER LOGIK
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('preloader').classList.add('hide');
-      }, 1000); 
-    });
-
-    // 2. SCROLL REVEAL
-    const revealElements = document.querySelectorAll('.reveal');
-    const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -20px 0px" };
-
-    const revealOnScroll = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('active');
-        observer.unobserve(entry.target); 
-      });
-    }, revealOptions);
-
-    revealElements.forEach(el => revealOnScroll.observe(el));
-
-    // 3. FAQ AKKORDEON LOGIK
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-      item.querySelector('.faq-question').addEventListener('click', () => {
-        faqItems.forEach(otherItem => {
-          if (otherItem !== item) otherItem.classList.remove('active');
-        });
-        item.classList.toggle('active');
-      });
-    });
-
-    // 4. LIVE BÖRSEN-TICKER (Simulator) - Korrekt in den Script-Tag integriert
+    // LIVE BÖRSEN-TICKER (Simulator)
     const stocks = [
       { name: "AAPL", price: 182.50, change: 0 },
       { name: "BYD", price: 34.20, change: 0 },
       { name: "TSM", price: 139.80, change: 0 },
       { name: "AMZN", price: 174.10, change: 0 },
       { name: "OMV.VI", price: 42.60, change: 0 },
-      { name: "INDEX", price: 1000.00, change: 1.2 } 
+      { name: "PENSION BETTINA", price: 1000.00, change: 5.4 } 
     ];
 
     function updateTicker() {
       let tickerString = "";
-      
       stocks.forEach(stock => {
         let volatility = (Math.random() * 1 - 0.5);
         stock.price = stock.price * (1 + volatility / 100);
         stock.change += volatility;
-
         let color = stock.change >= 0 ? "#00FF00" : "#FF3333"; 
         let arrow = stock.change >= 0 ? "▲" : "▼";
         let sign = stock.change >= 0 ? "+" : "";
-
         tickerString += `<span style="color: #FFFFFF">${stock.name}</span> <span style="color: ${color}">${stock.price.toFixed(2)} ${arrow} ${sign}${stock.change.toFixed(2)}%</span> &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; `;
       });
-
       document.getElementById('live-ticker').innerHTML = tickerString + tickerString + tickerString;
     }
-
     updateTicker();
     setInterval(updateTicker, 2000);
   </script>
