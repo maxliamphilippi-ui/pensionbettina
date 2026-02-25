@@ -8,7 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    /* Hintergrund und Grundeinstellungen (mit !important, damit Bootstrap es nicht überschreibt) */
+    /* GRUNDEINSTELLUNGEN & STERNENHIMMEL */
     body, html {
       margin: 0;
       padding: 0;
@@ -18,7 +18,6 @@
       scroll-behavior: smooth;
     }
 
-    /* Sternenhimmel */
     body::before {
       content: "";
       position: absolute;
@@ -32,17 +31,16 @@
       z-index: -1;
     }
 
-    /* Das Menü ganz oben fixieren */
     .navbar {
       z-index: 1000;
-      background: rgba(33, 37, 41, 0.9) !important; /* Leicht transparentes Schwarz */
+      background: rgba(33, 37, 41, 0.9) !important;
       backdrop-filter: blur(10px);
     }
 
-    /* Die Donau als SVG-Pfad */
+    /* DIE DONAU ALS PFAD */
     .donau-container {
       position: absolute;
-      top: 56px; /* Startet unter dem Menü */
+      top: 56px; 
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
@@ -61,13 +59,15 @@
       opacity: 0.6;
     }
 
-    /* Die Rakete */
-    .rakete {
+    /* ---------------------------------------------------
+       DIE NEUE ANIMIERTE FIGUR (Der Flug-Container)
+       --------------------------------------------------- */
+    .flug-objekt {
       position: fixed;
-      top: 56px; /* Startet unter dem Menü */
+      top: 56px;
       left: 0;
-      font-size: 4rem;
       z-index: 100;
+      /* Der unsichtbare Pfad für die Scroll-Animation */
       offset-path: path("M 200,0 C 800,800 100,1600 500,2400 C 900,3200 300,4000 600,4800 C 800,5600 200,6400 500,7200");
       offset-rotate: auto 90deg; 
       animation: fliegen auto linear;
@@ -79,7 +79,54 @@
       100% { offset-distance: 100%; }
     }
 
-    /* Die Sub-Websites (Sektionen) */
+    /* Der 3D-Wackel-Effekt für die Transportmittel */
+    .ikonen-3d {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px; 
+      height: 80px;
+      transform-style: preserve-3d;
+      animation: wackeln3d 1.5s infinite alternate ease-in-out;
+    }
+
+    /* Pseudo-3D Raum-Verzerrung und Schwebe-Schatten */
+    @keyframes wackeln3d {
+      0% { 
+        transform: perspective(300px) rotateY(-30deg) rotateX(15deg) scale(1); 
+        filter: drop-shadow(4px 10px 5px rgba(0, 0, 0, 0.6)); 
+      }
+      100% { 
+        transform: perspective(300px) rotateY(30deg) rotateX(-15deg) scale(1.1); 
+        filter: drop-shadow(-4px 20px 10px rgba(0, 0, 0, 0.3)); 
+      }
+    }
+
+    /* Alle Emojis liegen exakt übereinander, sind aber unsichtbar (opacity 0) */
+    .emoji {
+      position: absolute;
+      font-size: 3.5rem;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* WANN welches Emoji durchs Scrollen sichtbar wird */
+    .e-fahrrad   { animation: show-1 auto; animation-timeline: scroll(root block); }
+    .e-elefant   { animation: show-2 auto; animation-timeline: scroll(root block); }
+    .e-wandern   { animation: show-3 auto; animation-timeline: scroll(root block); }
+    .e-klettern1 { animation: show-4 auto; animation-timeline: scroll(root block); }
+    .e-klettern2 { animation: show-5 auto; animation-timeline: scroll(root block); }
+
+    /* Die Scroll-Prozente (aufgeteilt auf 6 Sektionen) */
+    @keyframes show-1 { 0%, 19.9% { opacity: 1; } 20%, 100% { opacity: 0; } }
+    @keyframes show-2 { 0%, 19.9% { opacity: 0; } 20%, 39.9% { opacity: 1; } 40%, 100% { opacity: 0; } }
+    @keyframes show-3 { 0%, 39.9% { opacity: 0; } 40%, 59.9% { opacity: 1; } 60%, 100% { opacity: 0; } }
+    @keyframes show-4 { 0%, 59.9% { opacity: 0; } 60%, 79.9% { opacity: 1; } 80%, 100% { opacity: 0; } }
+    @keyframes show-5 { 0%, 79.9% { opacity: 0; } 80%, 100% { opacity: 1; } }
+    /* --------------------------------------------------- */
+
+    /* SEKTIONEN UND BOXEN */
     section {
       position: relative;
       height: 100vh; 
@@ -93,7 +140,6 @@
     section:nth-child(odd) { align-items: flex-start; }
     section:nth-child(even) { align-items: flex-end; }
 
-    /* Glassmorphismus Info-Boxen */
     .content-box {
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(15px);
@@ -111,25 +157,9 @@
       border-color: rgba(0, 168, 255, 0.5);
     }
 
-    .content-box h1 {
-      font-size: 2.5rem;
-      margin-top: 0;
-      color: #00a8ff;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-    
-    .content-box h2 {
-      font-size: 1.2rem;
-      color: #a4b0be;
-      margin-bottom: 1.5rem;
-    }
-
-    .content-box p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #dfe4ea;
-    }
+    .content-box h1 { font-size: 2.5rem; margin-top: 0; color: #00a8ff; text-transform: uppercase; letter-spacing: 2px; }
+    .content-box h2 { font-size: 1.2rem; color: #a4b0be; margin-bottom: 1.5rem; }
+    .content-box p { font-size: 1.1rem; line-height: 1.6; color: #dfe4ea; }
 
     .btn-fancy {
       display: inline-block;
@@ -144,18 +174,9 @@
       border: none;
     }
 
-    .btn-fancy:hover {
-      box-shadow: 0 0 20px #00a8ff;
-      color: white;
-    }
-
-    .btn-insta {
-      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    }
-
-    .btn-insta:hover {
-      box-shadow: 0 0 20px #dc2743;
-    }
+    .btn-fancy:hover { box-shadow: 0 0 20px #00a8ff; color: white; }
+    .btn-insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+    .btn-insta:hover { box-shadow: 0 0 20px #dc2743; }
   </style>
 </head>
 <body>
@@ -177,7 +198,15 @@
     </div>
   </nav>
 
-  <div class="rakete">🚀</div>
+  <div class="flug-objekt">
+    <div class="ikonen-3d">
+      <span class="emoji e-fahrrad">🚲</span>
+      <span class="emoji e-elefant">🐘</span>
+      <span class="emoji e-wandern">🥾</span>
+      <span class="emoji e-klettern1">🧗‍♂️</span>
+      <span class="emoji e-klettern2">🧗‍♀️</span>
+    </div>
+  </div>
 
   <svg class="donau-container" viewBox="0 0 1000 7200" preserveAspectRatio="none">
     <path class="donau-fluss" d="M 200,0 C 800,800 100,1600 500,2400 C 900,3200 300,4000 600,4800 C 800,5600 200,6400 500,7200" />
