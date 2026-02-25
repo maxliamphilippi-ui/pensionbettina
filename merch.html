@@ -3,67 +3,233 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Merch - Pension Bettina</title>
+  <title>Pension Bettina - Bettindex & Trading</title>
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* 1. CORPORATE DESIGN CSS */
+    :root {
+      --bg-color: #F5F5F0; 
+      --text-color: #000000; 
+      --link-color: #0000EE; 
+      --link-hover: #551A8B; 
+    }
+
+    body, html {
+      margin: 0; padding: 0;
+      background-color: var(--bg-color) !important;
+      color: var(--text-color);
+      font-family: "Times New Roman", Times, serif; 
+      scroll-behavior: smooth;
+    }
+
+    body::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background-image: repeating-linear-gradient(transparent, transparent 49px, #E0E0E0 49px, #E0E0E0 50px);
+      z-index: -1;
+    }
+
+    /* 2. NAVBAR */
+    .navbar {
+      z-index: 1000; background: #FFFFFF !important;
+      border-bottom: 2px solid #000; padding: 10px 0;
+    }
+    .navbar-brand { 
+      font-size: 1.5rem; font-weight: bold; color: #000 !important; 
+      font-family: Arial, sans-serif;
+    }
+    .nav-link {
+      color: var(--link-color) !important; text-decoration: underline !important; 
+      font-family: Arial, sans-serif; font-size: 0.9rem; margin: 0 10px;
+    }
+    .nav-link:hover { color: var(--link-hover) !important; }
+
+    /* 3. CONTENT BOXES */
+    .page-container {
+      padding: 100px 10% 50px 10%;
+      display: flex; flex-direction: column; align-items: center; gap: 40px;
+    }
+
+    .content-box {
+      background: #FFFFFF; color: #000; padding: 2rem; border: 1px solid #000;
+      box-shadow: 2px 2px 0px #000; width: 100%; max-width: 800px;
+    }
+
+    .content-box h1 { font-size: 2.2rem; font-weight: bold; margin-bottom: 5px; border-bottom: 1px solid #000; padding-bottom: 5px; }
+    .content-box h2 { font-size: 1rem; color: #333; font-family: Arial, sans-serif; margin-bottom: 1.5rem; font-weight: normal; text-transform: uppercase; }
+    .content-box p { font-size: 1.1rem; line-height: 1.6; }
+
+    /* 4. TRADING TERMINAL (Wettfunktion) */
+    .trading-terminal {
+      background: #E8E8E8; border: 2px inset #FFF; padding: 15px; margin-top: 20px;
+      font-family: "Courier New", Courier, monospace;
+    }
+    .form-group { margin-bottom: 15px; }
+    .form-group label { font-weight: bold; display: block; margin-bottom: 5px; }
+    .form-group select, .form-group input { 
+      width: 100%; padding: 8px; font-family: "Courier New", Courier, monospace; 
+      border: 1px solid #888; background: #FFF;
+    }
+    
+    .btn-fancy {
+      display: inline-block; margin-top: 1rem; padding: 8px 15px;
+      background: #E0E0E0; color: #000; text-decoration: none;
+      font-weight: bold; font-family: Arial, sans-serif; font-size: 1rem;
+      border: 2px solid #000; cursor: pointer; box-shadow: 2px 2px 0px #000;
+    }
+    .btn-fancy:hover { background: #CCCCCC; transform: translate(1px, 1px); box-shadow: 1px 1px 0px #000; }
+
+    #trade-status {
+      display: none; margin-top: 15px; padding: 10px; background: #000; color: #00FF00;
+      font-weight: bold; text-align: center; border: 1px solid #00FF00;
+    }
+
+    /* 5. COMMODITIES GRID (Marmelade & Merch) */
+    .merch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 1.5rem; }
+    .merch-item { border: 1px solid #000; padding: 10px; background: #F9F9F9; text-align: center; font-family: Arial, sans-serif; }
+    .merch-item img { width: 100%; height: 200px; object-fit: cover; border: 1px solid #000; margin-bottom: 10px; filter: grayscale(10%); }
+    .merch-item strong { display: block; font-size: 1.1rem; margin-bottom: 5px; }
+    .merch-item span { font-size: 0.85rem; color: #666; display: block; margin-bottom: 10px; }
+    .price-tag { font-weight: bold; font-size: 1.2rem; color: #CC0000; display: block; margin-bottom: 10px; }
+
+    /* 6. FOOTER */
+    .brutal-footer {
+      background: #FFFFFF; color: #000; padding: 40px 5%; border-top: 3px double #000;
+      text-align: center; font-family: Arial, sans-serif; margin-top: 50px;
+    }
+    .footer-huge-text { font-size: 2rem; font-weight: bold; margin-bottom: 10px; font-family: "Times New Roman", serif; text-transform: uppercase; }
+    .footer-links { margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; }
+    .footer-links a { color: var(--link-color); text-decoration: underline; }
+  </style>
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="index.html">🏡 Pension Bettina</a>
+      <a class="navbar-brand" href="index.html">PENSION BETTINA INC.</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="index.html">Startseite</a></li>
-          <li class="nav-item"><a class="nav-link" href="ueber-uns.html">Über uns</a></li>
+          <li class="nav-item"><a class="nav-link" href="ueber-uns.html">Die BewohnerInnen</a></li>
           <li class="nav-item"><a class="nav-link" href="veranstaltungen.html">Veranstaltungen</a></li>
-          <li class="nav-item"><a class="nav-link active" href="merch.html">Merch</a></li>
+          <li class="nav-item"><a class="nav-link" style="font-weight: bold;" href="merch.html">Bettindex (Trading)</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <div class="container mt-5">
-    <h2>Support Your Local Wohnprojekt</h2>
-    <p class="text-muted">Mit dem Kauf unseres Merchs unterstützt du direkt unsere Gemeinschaftskasse!</p>
-    <hr>
+  <div class="page-container">
     
-    <div class="row mt-4 text-center">
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Pension Bettina T-Shirt</h5>
-            <p class="card-text">Bio-Baumwolle, fair produziert. Mit unserem schicken Logo.</p>
-            <h4 class="mb-3">20,00 €</h4>
-            <a href="mailto: maxphilippi@gmail.com" class="btn btn-dark">Per E-Mail bestellen</a>
-          </div>
+    <div class="content-box">
+      <h1>Bettindex & Trading</h1>
+      <h2>Abteilung: Spekulation & Rohstoffe (Commodities)</h2>
+      <p>Willkommen am Handelsplatz der Pension Bettina. Hier haben Sie die Möglichkeit, in unsere physischen Güter (Commodities) zu investieren oder am Terminmarkt auf hausinterne Entwicklungen zu spekulieren.</p>
+    </div>
+
+    <div class="content-box">
+      <h1>Derivate-Markt (Wetten)</h1>
+      <h2>Spekulieren Sie auf WG-Ereignisse</h2>
+      <p>Übernehmen Sie das Risiko! Platzieren Sie Ihre Einsätze auf die Volatilität unseres WG-Alltags. Renditen werden in Naturalien (Getränke) oder Respekt ausgezahlt.</p>
+      
+      <div class="trading-terminal">
+        <div class="form-group">
+          <label for="bet-asset">Underlying Asset (Worauf wetten Sie?):</label>
+          <select id="bet-asset">
+            <option value="putzplan">Putzplan-Einhaltung (Woche 42) - Short/Long</option>
+            <option value="plenum">Dauer des nächsten WG-Plenums (> 3 Stunden)</option>
+            <option value="kuehlschrank">Kühlschrank-Ausfall Q3 (Risk-Asset)</option>
+            <option value="tomaten">Tomatenernte 2026 (Wetter-Derivat)</option>
+          </select>
         </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Kaffeebecher</h5>
-            <p class="card-text">Für die langen Plena am Sonntagvormittag. Spülmaschinenfest.</p>
-            <h4 class="mb-3">10,00 €</h4>
-            <a href="mailto:maxmustermann@gmail.com" class="btn btn-dark">Per E-Mail bestellen</a>
-          </div>
+        
+        <div class="form-group">
+          <label for="bet-amount">Investitionsvolumen (Einsatz in EUR):</label>
+          <input type="number" id="bet-amount" placeholder="z.B. 10.00" min="1" step="0.50">
         </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Soli-Sticker-Pack</h5>
-            <p class="card-text">5 verschiedene Designs, perfekt für den Laptop oder die Laterne.</p>
-            <h4 class="mb-3">3,00 €</h4>
-            <a href="mailto:maxphilippi@gmail.com" class="btn btn-dark">Per E-Mail bestellen</a>
-          </div>
+
+        <button class="btn-fancy" onclick="placeOrder()">KAUFORDER AUSFÜHREN</button>
+        
+        <div id="trade-status">
+          > EXECUTING TRADE... <br>
+          > STATUS: TRANSACTION CONFIRMED.
         </div>
       </div>
     </div>
+
+    <div class="content-box">
+      <h1>Physische Güter (Commodities)</h1>
+      <h2>Erwerb von Liquid Assets & Textilien</h2>
+      <p>100% der Gewinne aus dem Verkauf unserer Rohstoffe fließen direkt in den Dachfonds (unsere WG-Kasse) zur Sicherung des Immobilienwerts.</p>
+      
+      <div class="merch-grid">
+        <div class="merch-item">
+          <img src="https://picsum.photos/400/300?random=11" alt="Marmelade">
+          <strong>Liquid Asset: Rote Rendite</strong>
+          <span>Hausgemachte Marmelade. Hohe Viskosität, exzellente Dividende auf jedem Frühstücksbrot. Limitierte Q2-Abfüllung.</span>
+          <span class="price-tag">4.50 EUR</span>
+          <a href="mailto:hallo@pension-bettina.at?subject=Kauforder: Marmelade" class="btn-fancy" style="font-size: 0.8rem; padding: 5px;">KAUFEN</a>
+        </div>
+
+        <div class="merch-item">
+          <img src="https://picsum.photos/400/300?random=12" alt="T-Shirt">
+          <strong>Corporate Wear (T-Shirt)</strong>
+          <span>Uniform für Aktionäre. Bio-Baumwolle, fair produziert. Steigert die Markenbekanntheit.</span>
+          <span class="price-tag">20.00 EUR</span>
+          <a href="mailto:hallo@pension-bettina.at?subject=Kauforder: T-Shirt" class="btn-fancy" style="font-size: 0.8rem; padding: 5px;">KAUFEN</a>
+        </div>
+        
+        <div class="merch-item">
+          <img src="https://picsum.photos/400/300?random=13" alt="Becher">
+          <strong>Plenum-Becher (Emaille)</strong>
+          <span>Unerlässlich für lange Vorstandsbesprechungen am Sonntagmorgen. Sturz- und krisenfest.</span>
+          <span class="price-tag">12.00 EUR</span>
+          <a href="mailto:hallo@pension-bettina.at?subject=Kauforder: Becher" class="btn-fancy" style="font-size: 0.8rem; padding: 5px;">KAUFEN</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 
+  <footer class="brutal-footer">
+    <div class="footer-huge-text">PENSION BETTINA INC.</div>
+    <div style="font-size: 0.85rem; color: #666;">Ein solidarisches Wohnprojekt. Risiko-Hinweis: Investitionen in WG-Projekte unterliegen starken Schwankungen.</div>
+    
+    <div class="footer-links">
+      <a href="mailto:hallo@pension-bettina.at">Kontakt (E-Mail)</a>
+      <a href="#">Impressum & Haftungsausschluss</a>
+      <a href="#">Broschüre zu Direktkrediten (PDF)</a>
+      <a href="https://finance.yahoo.com" target="_blank">Live-Kurse (Investor Relations)</a>
+    </div>
+    <p style="margin-top: 30px; font-size: 0.8rem; color: #999;">© 2026 Pension Bettina. All rights reserved.</p>
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Trading Terminal Logik
+    function placeOrder() {
+      const asset = document.getElementById("bet-asset").options[document.getElementById("bet-asset").selectedIndex].text;
+      const amount = document.getElementById("bet-amount").value;
+      const statusBox = document.getElementById("trade-status");
+
+      if(amount === "" || amount <= 0) {
+        alert("Systemfehler: Bitte valides Investitionsvolumen (Einsatz) eingeben.");
+        return;
+      }
+
+      // Terminal-Animation
+      statusBox.style.display = "block";
+      statusBox.style.color = "#FFCC00";
+      statusBox.innerHTML = "> PROCESSING ORDER FOR " + amount + " EUR...<br>> WAITING FOR MARKET MAKER...";
+
+      setTimeout(() => {
+        statusBox.style.color = "#00FF00";
+        statusBox.innerHTML = "> ORDER EXECUTED.<br>> WETTE PLATZIERT AUF: " + asset + "<br>> IHR PORTFOLIO-MANAGER WIRD SICH MELDEN.";
+      }, 1500);
+    }
+  </script>
 </body>
 </html>
