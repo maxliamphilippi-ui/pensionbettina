@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pension Bettina - Official Website</title>
+  <title>[Projektname] - Offizielle Website</title>
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
     /* =========================================
-       1. CSS VARIABLEN & BERKSHIRE GRUNDEINSTELLUNGEN
+       1. CSS VARIABLEN & GRUNDEINSTELLUNGEN
        ========================================= */
     :root {
-      --bg-color: #F5F5F0; /* Klassisches, altes Web-Beige/Grau */
-      --text-color: #000000; /* Tiefschwarz */
-      --link-color: #0000EE; /* Das klassische HTML-Link-Blau */
-      --link-hover: #551A8B; /* Klassisches Visited-Link-Lila */
-      --border-thick: 1px solid #A0A0A0; /* Dünne, graue System-Rahmen */
+      --bg-color: #F5F5F0; 
+      --text-color: #000000; 
+      --link-color: #0000EE; 
+      --link-hover: #551A8B; 
+      --border-thick: 1px solid #A0A0A0; 
     }
 
     body, html {
@@ -24,13 +24,11 @@
       padding: 0;
       background-color: var(--bg-color) !important;
       color: var(--text-color);
-      /* BERKSHIRE VIBE: Standard Serif-Schriftart des Systems */
       font-family: "Times New Roman", Times, serif; 
       overflow-x: hidden; 
       scroll-behavior: smooth;
     }
 
-    /* Dezenter, altmodischer Hintergrund-Strich (statt Noise/Raster) */
     body::before {
       content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
       background-image: repeating-linear-gradient(transparent, transparent 49px, #E0E0E0 49px, #E0E0E0 50px);
@@ -38,7 +36,7 @@
     }
 
     /* =========================================
-       2. PRELOADER (Oldschool Terminal Look)
+       2. PRELOADER
        ========================================= */
     #preloader {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -51,7 +49,7 @@
     .loading-text { font-size: 1.2rem; font-weight: bold; color: #000; }
 
     /* =========================================
-       3. NAVBAR & BÖRSEN-MARQUEE
+       3. NAVBAR & MARQUEE
        ========================================= */
     .navbar {
       z-index: 1000;
@@ -65,17 +63,16 @@
     }
     .nav-link {
       color: var(--link-color) !important;
-      text-decoration: underline !important; /* Klassische Links! */
+      text-decoration: underline !important; 
       font-family: Arial, sans-serif;
       font-size: 0.9rem; margin: 0 10px;
     }
     .nav-link:hover { color: var(--link-hover) !important; }
 
-<div class="marquee-container">
-    <div class="marquee-text" id="live-ticker">
-      Verbinde zum WG-Börsenterminal... Lade Aktienkurse...
-    </div>
-  </div>
+    .marquee-container {
+      position: fixed; top: 60px; width: 100%; background: #000; color: #00FF00;
+      border-bottom: var(--border-thick); overflow: hidden; white-space: nowrap; z-index: 900; padding: 5px 0;
+      font-family: "Courier New", Courier, monospace; font-weight: bold; font-size: 0.9rem;
     }
     .marquee-text {
       display: inline-block; animation: scroll-left 30s linear infinite;
@@ -83,14 +80,14 @@
     @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* =========================================
-       4. DONAU SVG & 3D EMOJI (Die moderne Magie)
+       4. ANIMATIONEN & 3D EMOJI
        ========================================= */
     .donau-container {
       position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
       width: 100%; max-width: 1200px; height: 800vh; z-index: 0; pointer-events: none;
     }
     .donau-fluss {
-      fill: none; stroke: #CCCCCC; /* Sehr dezentes Grau für die Route */
+      fill: none; stroke: #CCCCCC; 
       stroke-width: 2; stroke-linecap: square; stroke-dasharray: 10 10;
     }
 
@@ -124,7 +121,7 @@
     @keyframes show-5 { 0%, 79.9% { opacity: 0; } 80%, 100% { opacity: 1; } }
 
     /* =========================================
-       5. SECTIONS & CORPORATE CONTENT BOXES
+       5. SECTIONS & CONTENT BOXES
        ========================================= */
     section {
       position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
@@ -138,40 +135,25 @@
 
     .content-box {
       background: #FFFFFF; color: #000; padding: 2rem; border: 1px solid #000;
-      box-shadow: 2px 2px 0px #000; /* Sehr schlichter Retro-Schatten */
+      box-shadow: 2px 2px 0px #000; 
       max-width: 600px; transition: all 0.2s ease;
     }
 
-    /* Seriöse Typografie */
     .content-box h1 { font-size: 2.2rem; font-weight: bold; margin-bottom: 5px; border-bottom: 1px solid #000; padding-bottom: 5px; }
     .content-box h2 { font-size: 1rem; color: #333; font-family: Arial, sans-serif; margin-bottom: 1.5rem; font-weight: normal; }
     .content-box p { font-size: 1.1rem; line-height: 1.5; }
 
-    /* Klassische Text-Links statt fetter Buttons */
     .btn-fancy {
       display: inline-block; margin-top: 1rem; color: var(--link-color); text-decoration: underline;
       font-weight: normal; font-size: 1.1rem; cursor: pointer; font-family: Arial, sans-serif;
     }
     .btn-fancy:hover { color: var(--link-hover); }
 
-    /* Standard Bilder-Ansicht */
     .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 1.5rem; }
     .brutal-img { width: 100%; height: auto; border: 1px solid #000; }
 
-    <section id="cleaning">
-    <div class="content-box reveal" style="max-width: 650px; text-align: center;">
-      <h1>Department of Cleaning</h1>
-      <h2>Standort: WG Flur | Interaktives Training</h2>
-      <p>Bevor Sie in die Pension Bettina investieren oder einziehen können, müssen Sie den offiziellen Putz-Simulator absolvieren. Vorsicht vor dem Kabelsalat!</p>
-      
-      <div style="border: 3px solid #000; margin-top: 20px; background: #2D3748; padding: 10px;">
-        <iframe src="cleaning.html" width="420" height="420" style="border: none; overflow: hidden;" scrolling="no" title="Putzplan Simulator"></iframe>
-      </div>
-    </div>
-  </section>
-
     /* =========================================
-       6. FAQ & FOOTER (Corporate Style)
+       6. FAQ & FOOTER
        ========================================= */
     .faq-container { margin-top: 1.5rem; border-top: 1px solid #000; }
     .faq-item { border-bottom: 1px solid #000; }
@@ -183,7 +165,7 @@
       background: #FFFFFF; color: #000; padding: 40px 5%; border-top: 3px double #000;
       text-align: center; font-family: Arial, sans-serif;
     }
-    .footer-huge-text { font-size: 2rem; font-weight: bold; margin-bottom: 10px; font-family: "Times New Roman", serif; }
+    .footer-huge-text { font-size: 2rem; font-weight: bold; margin-bottom: 10px; font-family: "Times New Roman", serif; text-transform: uppercase; }
     .footer-links { margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; }
     .footer-links a { color: var(--link-color); text-decoration: underline; }
   </style>
@@ -191,29 +173,29 @@
 <body>
 
   <div id="preloader">
-    <div class="loading-text">Loading Pension Bettina Corporate Data... Please Wait.</div>
+    <div class="loading-text">Initialisiere Daten... Bitte warten.</div>
   </div>
 
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="index.html">PENSION BETTINA INC.</a>
+      <a class="navbar-brand" href="index.html">[PROJEKTNAME]</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="index.html">Startseite</a></li>
-          <li class="nav-item"><a class="nav-link" href="ueber-uns.html">Die BewohnerInnen</a></li>
+          <li class="nav-item"><a class="nav-link" href="ueber-uns.html">Über uns</a></li>
           <li class="nav-item"><a class="nav-link" href="veranstaltungen.html">Veranstaltungen</a></li>
-          <li class="nav-item"><a class="nav-link" href="merch.html">Merch</a></li>
+          <li class="nav-item"><a class="nav-link" href="merch.html">Unterstützung</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
   <div class="marquee-container">
-    <div class="marquee-text">
-      WG-INDEX (WGI) 14,230.50 ▲ +2.4% &nbsp;&nbsp;|&nbsp;&nbsp; SOLIDARITÄT (SOL) 100.00 ▲ +5.0% &nbsp;&nbsp;|&nbsp;&nbsp; KAPITALISMUS (KAP) 12.30 ▼ -8.5% &nbsp;&nbsp;|&nbsp;&nbsp; PENSION BETTINA (PB) STRONG BUY &nbsp;&nbsp;|&nbsp;&nbsp; KÜFA-VEGAN (KVG) 8.50 ▲ +1.2% &nbsp;&nbsp;|&nbsp;&nbsp; WG-INDEX (WGI) 14,230.50 ▲ +2.4% 
+    <div class="marquee-text" id="live-ticker">
+      Lade Marktdaten...
     </div>
   </div>
 
@@ -233,104 +215,118 @@
 
   <section id="start">
     <div class="content-box reveal">
-      <h1>Executive Summary</h1>
-      <h2>Standort: Kahlenberg | Abteilung: Überblick</h2>
-      <p>Hier startet unsere Unternehmung. Wir restrukturieren die Stadt von unten. Das Wohnprojekt "Pension Bettina" operiert profitfrei, aber mit hohem sozialen Return on Investment (ROI).</p>
-      <a href="#bewohner" class="btn-fancy">Weiterführende Informationen lesen</a>
+      <h1>[Überschrift: Vision / Zusammenfassung]</h1>
+      <h2>[Unterüberschrift: Standort oder Kurzbeschreibung]</h2>
+      <p>[Hier steht ein einleitender Text über euer Projekt. Beschreibt kurz eure Ziele, eure Struktur und warum dieses Projekt existiert.]</p>
+      <a href="#bewohner" class="btn-fancy">Mehr erfahren</a>
     </div>
   </section>
 
   <section id="bewohner">
     <div class="content-box reveal">
-      <h1>Board of Directors (Die Crew)</h1>
-      <h2>Standort: Donauinsel | Struktur: Basisdemokratie</h2>
-      <p>Ein Zusammenschluss von Individuen, der sich hier am Wasser sammelt, um gemeinsam Utopien zu bauen. Wir teilen Aufgaben, grillen und de-privatisieren unseren Wohnraum.</p>
+      <h1>[Überschrift: Das Team / Die Gemeinschaft]</h1>
+      <h2>[Unterüberschrift: Rechtsform oder Organisation]</h2>
+      <p>[Hier beschreibt ihr die Menschen hinter dem Projekt. Wie ist die Gruppe zusammengesetzt, wie organisiert ihr euch (z.B. Plena, Konsens) und welche Werte vertretet ihr.]</p>
       
       <div class="image-grid">
-        <img src="https://picsum.photos/300/200?random=1" alt="Meeting 1" class="brutal-img">
-        <img src="https://picsum.photos/300/200?random=2" alt="Meeting 2" class="brutal-img">
+        <img src="https://picsum.photos/300/200?random=1" alt="Platzhalter Bild 1" class="brutal-img">
+        <img src="https://picsum.photos/300/200?random=2" alt="Platzhalter Bild 2" class="brutal-img">
       </div>
       
-      <a href="ueber-uns.html" class="btn-fancy">Zum vollständigen Team-Verzeichnis</a>
+      <a href="ueber-uns.html" class="btn-fancy">Vollständige Informationen ansehen</a>
     </div>
   </section>
 
   <section id="veranstaltungen">
     <div class="content-box reveal">
-      <h1>Jahreshauptversammlungen (Events)</h1>
-      <h2>Standort: Donaukanal | Abteilung: Urbane Praxis</h2>
-      <p>KüFas (Küche für alle), kleine Konzerte und offene Plena. Wir fungieren als offener Hub für die Nachbarschafts-Stakeholder.</p>
+      <h1>[Überschrift: Termine & Events]</h1>
+      <h2>[Unterüberschrift: Offene Veranstaltungen]</h2>
+      <p>[Hier könnt ihr erklären, inwiefern euer Hausprojekt in die Nachbarschaft wirkt. Erwähnt regelmäßige Treffen, offene Werkstätten oder Informationsveranstaltungen.]</p>
       
       <ul style="font-family: Arial, sans-serif; font-size: 0.95rem; margin-top: 15px;">
-        <li><strong>24. Mai:</strong> Hofkonzert & Networking</li>
-        <li><strong>02. Juni:</strong> KüFa - Vegane Verpflegungsausgabe</li>
-        <li><strong>15. Juni:</strong> Reparatur-Workshop (Fahrräder)</li>
+        <li><strong>[TT. Monat JJJJ]:</strong> [Titel Veranstaltung 1]</li>
+        <li><strong>[TT. Monat JJJJ]:</strong> [Titel Veranstaltung 2]</li>
+        <li><strong>[TT. Monat JJJJ]:</strong> [Titel Veranstaltung 3]</li>
       </ul>
 
-      <a href="veranstaltungen.html" class="btn-fancy">Terminkalender aufrufen</a>
+      <a href="veranstaltungen.html" class="btn-fancy">Zum vollständigen Kalender</a>
     </div>
   </section>
 
   <section id="merch">
     <div class="content-box reveal">
-      <h1>Merchandise & Support</h1>
-      <h2>Aktionärs-Informationen | Direktkredite</h2>
-      <p>Unterstützen Sie das Projekt durch den Erwerb von Merchandising-Artikeln. 100% der Gewinne fließen in die Instandhaltung der Immobilienwerte.</p>
+      <h1>[Überschrift: Finanzierung & Unterstützung]</h1>
+      <h2>[Unterüberschrift: Direktkredite & Solidarbeiträge]</h2>
+      <p>[Erklärt hier kurz, wie sich das Projekt finanziert. Informationen zu Direktkrediten, Spendenmöglichkeiten oder dem Erwerb von Soli-Artikeln können hier platziert werden.]</p>
       
       <ul style="font-family: Arial, sans-serif; font-size: 0.95rem;">
-        <li>Textil-Shirt (Schwarz) - 20.00 EUR</li>
-        <li>Kaffee-Behältnis (Emaille) - 12.00 EUR</li>
+        <li>[Artikel / Unterstützungsmöglichkeit 1] - [Betrag]</li>
+        <li>[Artikel / Unterstützungsmöglichkeit 2] - [Betrag]</li>
       </ul>
 
-      <a href="merch.html" class="btn-fancy">Zum Bestellformular (Shop)</a>
+      <a href="merch.html" class="btn-fancy">Weitere Details zur Unterstützung</a>
+    </div>
+  </section>
+
+  <section id="cleaning">
+    <div class="content-box reveal" style="max-width: 650px; text-align: center;">
+      <h1>[Überschrift: Interaktives Modul]</h1>
+      <h2>[Unterüberschrift: Beschreibung des Moduls]</h2>
+      <p>[Ein kurzer Einleitungstext, der erklärt, warum hier ein interaktives Element zu finden ist.]</p>
+      
+      <div style="border: 3px solid #000; margin-top: 20px; background: #2D3748; padding: 10px;">
+        <iframe src="cleaning.html" width="420" height="420" style="border: none; overflow: hidden;" scrolling="no" title="Interaktives Modul"></iframe>
+      </div>
     </div>
   </section>
 
   <section id="faq">
     <div class="content-box reveal">
-      <h1>Frequently Asked Questions</h1>
-      <h2>Informationen für Interessenten</h2>
-      <p>Bitte konsultieren Sie diese Datenbank, bevor Sie den E-Mail-Support kontaktieren.</p>
+      <h1>[Überschrift: Häufige Fragen (FAQ)]</h1>
+      <h2>[Unterüberschrift: Wichtige Informationen]</h2>
+      <p>[Ein kurzer Satz, der dazu aufruft, diese Liste vor einer Kontaktaufnahme durchzulesen.]</p>
       
       <div class="faq-container">
         <div class="faq-item">
-          <div class="faq-question">Frage 1: Habt ihr aktuell Zimmer frei?</div>
-          <div class="faq-answer">Aktuell verfügen wir über keine Vakanzen. Zukünftige Ausschreibungen werden über unsere offiziellen Kommunikationskanäle (Newsletter) publiziert.</div>
+          <div class="faq-question">[Platzhalter Frage 1]</div>
+          <div class="faq-answer">[Platzhalter Antwort 1. Hier könnt ihr ausführlich auf die Frage eingehen.]</div>
         </div>
         <div class="faq-item">
-          <div class="faq-question">Frage 2: Sind Haustiere gestattet?</div>
-          <div class="faq-answer">Grundsätzlich ja. Es bedarf jedoch einer vorherigen Evaluierung zur Kompatibilität mit den bereits ansässigen Tieren.</div>
+          <div class="faq-question">[Platzhalter Frage 2]</div>
+          <div class="faq-answer">[Platzhalter Antwort 2. Hier könnt ihr ausführlich auf die Frage eingehen.]</div>
         </div>
         <div class="faq-item">
-          <div class="faq-question">Frage 3: Wie finanzieren Sie das Objekt?</div>
-          <div class="faq-answer">Die Finanzierung erfolgt primär über nachrangige Direktkredite von Unterstützern (Crowd-Investing). Das Immobilien-Asset ist dem spekulativen Markt dauerhaft entzogen.</div>
+          <div class="faq-question">[Platzhalter Frage 3]</div>
+          <div class="faq-answer">[Platzhalter Antwort 3. Hier könnt ihr ausführlich auf die Frage eingehen.]</div>
         </div>
       </div>
     </div>
   </section>
 
   <footer class="brutal-footer reveal">
-    <div class="footer-huge-text">PENSION BETTINA INC.</div>
-    <div style="font-size: 0.85rem; color: #666;">Ein solidarisches Wohnprojekt. Kein Verkauf von Aktien möglich.</div>
+    <div class="footer-huge-text">[PROJEKTNAME]</div>
+    <div style="font-size: 0.85rem; color: #666;">[Kurzer Claim oder Projektbeschreibungssatz]</div>
     
     <div class="footer-links">
       <a href="mailto:hallo@pension-bettina.at">Kontakt (E-Mail)</a>
       <a href="#">Impressum & Haftungsausschluss</a>
       <a href="#">Broschüre zu Direktkrediten (PDF)</a>
+      <a href="https://finance.yahoo.com" target="_blank">Live-Kurse (Investor Relations)</a>
     </div>
-    <p style="margin-top: 30px; font-size: 0.8rem; color: #999;">© 2026 Pension Bettina. All rights reserved. Optimal viewed in Netscape Navigator or Internet Explorer 5.0.</p>
+
+    <p style="margin-top: 30px; font-size: 0.8rem; color: #999;">© 2026 [Projektname]. Alle Rechte vorbehalten.</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // 1. PRELOADER LOGIK (Kurzer "Boot"-Screen)
+    // 1. PRELOADER LOGIK
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('preloader').classList.add('hide');
       }, 1000); 
     });
 
-    // 2. SCROLL REVEAL (Seriöses Einblenden)
+    // 2. SCROLL REVEAL
     const revealElements = document.querySelectorAll('.reveal');
     const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -20px 0px" };
 
@@ -354,43 +350,37 @@
         item.classList.toggle('active');
       });
     });
-  </script>
-</body>
-</html>
 
-// 4. LIVE BÖRSEN-TICKER (Simulator)
-    // Startwerte (ungefähr) für deine Wunsch-Aktien
+    // 4. LIVE BÖRSEN-TICKER (Simulator) - Korrekt in den Script-Tag integriert
     const stocks = [
       { name: "AAPL", price: 182.50, change: 0 },
       { name: "BYD", price: 34.20, change: 0 },
       { name: "TSM", price: 139.80, change: 0 },
       { name: "AMZN", price: 174.10, change: 0 },
       { name: "OMV.VI", price: 42.60, change: 0 },
-      { name: "PENSION BETTINA", price: 1000.00, change: 5.4 } // Ein kleiner WG-Scherz
+      { name: "INDEX", price: 1000.00, change: 1.2 } 
     ];
 
     function updateTicker() {
       let tickerString = "";
       
       stocks.forEach(stock => {
-        // Kleine, realistische Schwankungen berechnen (-0.5% bis +0.5%)
         let volatility = (Math.random() * 1 - 0.5);
         stock.price = stock.price * (1 + volatility / 100);
         stock.change += volatility;
 
-        // Farben und Pfeile bestimmen
-        let color = stock.change >= 0 ? "#00FF00" : "#FF3333"; // Grün oder Rot
+        let color = stock.change >= 0 ? "#00FF00" : "#FF3333"; 
         let arrow = stock.change >= 0 ? "▲" : "▼";
         let sign = stock.change >= 0 ? "+" : "";
 
-        // Text zusammenbauen (Name in Weiß, Werte in Farbe)
         tickerString += `<span style="color: #FFFFFF">${stock.name}</span> <span style="color: ${color}">${stock.price.toFixed(2)} ${arrow} ${sign}${stock.change.toFixed(2)}%</span> &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; `;
       });
 
-      // Den Text zweimal aneinanderhängen, damit das Laufband nie abbricht
       document.getElementById('live-ticker').innerHTML = tickerString + tickerString + tickerString;
     }
 
-    // Sofort einmal ausführen und dann alle 2 Sekunden aktualisieren
     updateTicker();
     setInterval(updateTicker, 2000);
+  </script>
+</body>
+</html>
