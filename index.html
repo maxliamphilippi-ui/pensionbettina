@@ -3,22 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pension Bettina - Wohnprojekt</title>
+  <title>Pension Bettina - Official Website</title>
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 
   <style>
     /* =========================================
-       1. CSS VARIABLEN & GRUNDEINSTELLUNGEN
+       1. CSS VARIABLEN & BERKSHIRE GRUNDEINSTELLUNGEN
        ========================================= */
     :root {
-      --bg-color: #050505;
-      --text-color: #ffffff;
-      --neon-pink: #ff007f;
-      --neon-yellow: #ccff00;
-      --neon-cyan: #00ffff;
-      --border-thick: 5px solid #000;
+      --bg-color: #F5F5F0; /* Klassisches, altes Web-Beige/Grau */
+      --text-color: #000000; /* Tiefschwarz */
+      --link-color: #0000EE; /* Das klassische HTML-Link-Blau */
+      --link-hover: #551A8B; /* Klassisches Visited-Link-Lila */
+      --border-thick: 1px solid #A0A0A0; /* Dünne, graue System-Rahmen */
     }
 
     body, html {
@@ -26,154 +24,92 @@
       padding: 0;
       background-color: var(--bg-color) !important;
       color: var(--text-color);
-      font-family: 'Syne', sans-serif;
+      /* BERKSHIRE VIBE: Standard Serif-Schriftart des Systems */
+      font-family: "Times New Roman", Times, serif; 
       overflow-x: hidden; 
       scroll-behavior: smooth;
-      cursor: none; /* Wir blenden den echten Mauszeiger aus */
     }
 
-    /* PUNK-NOISE HINTERGRUND (Film-Körnung) */
-    .noise-bg {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.05;
-      background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-    }
-
-    /* RASTER HINTERGRUND */
+    /* Dezenter, altmodischer Hintergrund-Strich (statt Noise/Raster) */
     body::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
+      content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background-image: repeating-linear-gradient(transparent, transparent 49px, #E0E0E0 49px, #E0E0E0 50px);
       z-index: -1;
     }
 
     /* =========================================
-       2. CUSTOM CURSOR
-       ========================================= */
-    .custom-cursor {
-      position: fixed;
-      top: 0; left: 0;
-      width: 30px; height: 30px;
-      border-radius: 50%;
-      background-color: var(--neon-yellow);
-      mix-blend-mode: difference;
-      pointer-events: none;
-      z-index: 10000;
-      transform: translate(-50%, -50%);
-      transition: width 0.2s, height 0.2s, background-color 0.2s;
-    }
-    .custom-cursor.hovering {
-      width: 80px; height: 80px;
-      background-color: var(--neon-pink);
-    }
-
-    /* =========================================
-       3. PRELOADER (LADEBILDSCHIRM)
+       2. PRELOADER (Oldschool Terminal Look)
        ========================================= */
     #preloader {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: #000;
-      z-index: 99999;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: #FFFFFF; z-index: 99999; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      transition: opacity 0.5s ease;
+      font-family: "Courier New", Courier, monospace;
     }
-    #preloader.hide { transform: translateY(-100%); }
-    
-    .glitch-text {
-      font-size: 5rem;
-      font-weight: 800;
-      color: var(--neon-yellow);
-      text-transform: uppercase;
-      position: relative;
-      animation: glitch 1s linear infinite;
-    }
-    @keyframes glitch {
-      2%, 64% { transform: translate(2px, 0) skew(0deg); }
-      4%, 60% { transform: translate(-2px, 0) skew(0deg); }
-      62% { transform: translate(0, 0) skew(5deg); }
-    }
-    .loading-bar-container { width: 300px; height: 5px; background: #333; margin-top: 20px; }
-    .loading-bar { width: 0%; height: 100%; background: var(--neon-pink); animation: loadBar 2s ease-in-out forwards; }
-    @keyframes loadBar { 100% { width: 100%; } }
+    #preloader.hide { opacity: 0; pointer-events: none; }
+    .loading-text { font-size: 1.2rem; font-weight: bold; color: #000; }
 
     /* =========================================
-       4. NAVBAR & MARQUEE
+       3. NAVBAR & BÖRSEN-MARQUEE
        ========================================= */
     .navbar {
       z-index: 1000;
-      background: #fff !important;
-      border-bottom: var(--border-thick);
-      padding: 15px 0;
+      background: #FFFFFF !important;
+      border-bottom: 2px solid #000;
+      padding: 10px 0;
     }
-    .navbar-brand { font-size: 1.8rem; font-weight: 900; color: #000 !important; letter-spacing: -1px;}
+    .navbar-brand { 
+      font-size: 1.5rem; font-weight: bold; color: #000 !important; 
+      font-family: Arial, sans-serif; letter-spacing: 0px;
+    }
     .nav-link {
-      color: #000 !important;
-      font-weight: 800;
-      text-transform: uppercase;
-      margin: 0 10px;
-      position: relative;
+      color: var(--link-color) !important;
+      text-decoration: underline !important; /* Klassische Links! */
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem; margin: 0 10px;
     }
-    .nav-link::after {
-      content: ''; position: absolute; width: 100%; height: 4px;
-      background: var(--neon-pink); bottom: 0; left: 0;
-      transform: scaleX(0); transform-origin: bottom right; transition: transform 0.25s ease-out;
-    }
-    .nav-link:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+    .nav-link:hover { color: var(--link-hover) !important; }
 
     .marquee-container {
-      position: fixed;
-      top: 76px; width: 100%; background: var(--neon-yellow);
-      border-bottom: var(--border-thick); overflow: hidden; white-space: nowrap; z-index: 900; padding: 10px 0;
+      position: fixed; top: 60px; width: 100%; background: #000; color: #00FF00; /* Börsen-Grün auf Schwarz */
+      border-bottom: var(--border-thick); overflow: hidden; white-space: nowrap; z-index: 900; padding: 5px 0;
+      font-family: "Courier New", Courier, monospace; font-weight: bold; font-size: 0.9rem;
     }
     .marquee-text {
-      display: inline-block; font-size: 1.5rem; font-weight: 800; color: #000; text-transform: uppercase;
-      animation: scroll-left 20s linear infinite;
+      display: inline-block; animation: scroll-left 30s linear infinite;
     }
     @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* =========================================
-       5. DONAU SVG & 3D EMOJI RAKETE
+       4. DONAU SVG & 3D EMOJI (Die moderne Magie)
        ========================================= */
     .donau-container {
-      position: absolute; top: 120px; left: 50%; transform: translateX(-50%);
-      width: 100%; max-width: 1200px; height: 800vh; /* Verlängert für mehr Content */
-      z-index: 0; pointer-events: none;
+      position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
+      width: 100%; max-width: 1200px; height: 800vh; z-index: 0; pointer-events: none;
     }
     .donau-fluss {
-      fill: none; stroke: var(--neon-cyan); stroke-width: 20; stroke-linecap: square; stroke-dasharray: 30 30;
-      animation: dashMove 2s linear infinite;
+      fill: none; stroke: #CCCCCC; /* Sehr dezentes Grau für die Route */
+      stroke-width: 2; stroke-linecap: square; stroke-dasharray: 10 10;
     }
-    @keyframes dashMove { to { stroke-dashoffset: -60; } }
 
     .flug-objekt {
-      position: fixed; top: 120px; left: 0; z-index: 100;
+      position: fixed; top: 100px; left: 0; z-index: 100;
       offset-path: path("M 200,0 C 800,800 100,1600 500,2400 C 900,3200 300,4000 600,4800 C 800,5600 200,6400 500,7200 C 900,8000 100,8800 500,9600");
       offset-rotate: auto 90deg; animation: fliegen auto linear; animation-timeline: scroll(root block);
     }
     @keyframes fliegen { 0% { offset-distance: 0%; } 100% { offset-distance: 100%; } }
 
     .ikonen-3d {
-      position: relative; display: flex; justify-content: center; align-items: center; width: 80px; height: 80px;
-      transform-style: preserve-3d; animation: wackeln3d 1s infinite alternate ease-in-out;
+      position: relative; display: flex; justify-content: center; align-items: center; width: 60px; height: 60px;
+      transform-style: preserve-3d; animation: wackeln3d 2s infinite alternate ease-in-out;
     }
     @keyframes wackeln3d {
-      0% { transform: perspective(300px) rotateY(-20deg) scale(1); filter: drop-shadow(4px 10px 0px var(--neon-pink)); }
-      100% { transform: perspective(300px) rotateY(20deg) scale(1.2); filter: drop-shadow(-4px 10px 0px var(--neon-yellow)); }
+      0% { transform: perspective(300px) rotateY(-15deg) scale(1); filter: drop-shadow(2px 5px 2px rgba(0,0,0,0.2)); }
+      100% { transform: perspective(300px) rotateY(15deg) scale(1.1); filter: drop-shadow(-2px 5px 2px rgba(0,0,0,0.2)); }
     }
-    .emoji { position: absolute; font-size: 4.5rem; opacity: 0; pointer-events: none; }
+    .emoji { position: absolute; font-size: 3rem; opacity: 0; pointer-events: none; }
     
-    /* Wann Emojis erscheinen */
     .e-fahrrad   { animation: show-1 auto; animation-timeline: scroll(root block); }
     .e-elefant   { animation: show-2 auto; animation-timeline: scroll(root block); }
     .e-wandern   { animation: show-3 auto; animation-timeline: scroll(root block); }
@@ -187,7 +123,7 @@
     @keyframes show-5 { 0%, 79.9% { opacity: 0; } 80%, 100% { opacity: 1; } }
 
     /* =========================================
-       6. BRUTALIST SECTIONS & GRIDS
+       5. SECTIONS & CORPORATE CONTENT BOXES
        ========================================= */
     section {
       position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
@@ -196,105 +132,67 @@
     section:nth-child(odd) { align-items: flex-start; }
     section:nth-child(even) { align-items: flex-end; }
 
-    /* Scroll Reveal Klassen */
-    .reveal { opacity: 0; transform: translateY(100px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
     .reveal.active { opacity: 1; transform: translateY(0); }
 
     .content-box {
-      background: #fff; color: #000; padding: 3rem; border: var(--border-thick);
-      box-shadow: 15px 15px 0px var(--neon-pink); max-width: 600px;
-      transform: rotate(-2deg); transition: all 0.3s ease; position: relative;
+      background: #FFFFFF; color: #000; padding: 2rem; border: 1px solid #000;
+      box-shadow: 2px 2px 0px #000; /* Sehr schlichter Retro-Schatten */
+      max-width: 600px; transition: all 0.2s ease;
     }
-    section:nth-child(even) .content-box { transform: rotate(2deg); box-shadow: -15px 15px 0px var(--neon-cyan); }
-    .content-box:hover { transform: scale(1.02) rotate(0deg); box-shadow: 0px 0px 0px #000; }
 
-    /* Fette Box-Typografie */
-    .content-box h1 { font-size: 4.5rem; font-weight: 800; line-height: 0.9; margin-top: 0; text-transform: uppercase; letter-spacing: -3px; }
-    .content-box h2 { font-size: 1.2rem; background: #000; color: #fff; display: inline-block; padding: 5px 10px; margin: 1rem 0; text-transform: uppercase; }
-    .content-box p { font-size: 1.2rem; font-family: sans-serif; font-weight: bold; line-height: 1.5; }
+    /* Seriöse Typografie */
+    .content-box h1 { font-size: 2.2rem; font-weight: bold; margin-bottom: 5px; border-bottom: 1px solid #000; padding-bottom: 5px; }
+    .content-box h2 { font-size: 1rem; color: #333; font-family: Arial, sans-serif; margin-bottom: 1.5rem; font-weight: normal; }
+    .content-box p { font-size: 1.1rem; line-height: 1.5; }
 
-    /* Brutal Buttons */
+    /* Klassische Text-Links statt fetter Buttons */
     .btn-fancy {
-      display: inline-block; margin-top: 1.5rem; padding: 15px 30px; background: #000; color: var(--neon-yellow);
-      text-decoration: none; font-weight: 900; text-transform: uppercase; border: 3px solid #000; transition: all 0.2s; cursor: none;
+      display: inline-block; margin-top: 1rem; color: var(--link-color); text-decoration: underline;
+      font-weight: normal; font-size: 1.1rem; cursor: pointer; font-family: Arial, sans-serif;
     }
-    .btn-fancy:hover { background: var(--neon-yellow); color: #000; box-shadow: 8px 8px 0px #000; transform: translate(-4px, -4px); }
-    
-    .btn-insta { background: var(--neon-pink); color: #fff; }
-    .btn-insta:hover { background: #000; color: var(--neon-pink); }
+    .btn-fancy:hover { color: var(--link-hover); }
+
+    /* Standard Bilder-Ansicht */
+    .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 1.5rem; }
+    .brutal-img { width: 100%; height: auto; border: 1px solid #000; }
 
     /* =========================================
-       7. BILDER & GALERIEN IM MRAZ-STIL
+       6. FAQ & FOOTER (Corporate Style)
        ========================================= */
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 2rem; }
-    .brutal-img {
-      width: 100%; height: 200px; object-fit: cover; border: 4px solid #000;
-      filter: grayscale(100%) contrast(150%); transition: all 0.3s ease; cursor: none;
-    }
-    .brutal-img:hover { filter: grayscale(0%) contrast(100%); transform: scale(1.05) rotate(3deg); box-shadow: 10px 10px 0px var(--neon-yellow); z-index: 2; position: relative;}
+    .faq-container { margin-top: 1.5rem; border-top: 1px solid #000; }
+    .faq-item { border-bottom: 1px solid #000; }
+    .faq-question { padding: 10px 0; font-weight: bold; cursor: pointer; color: var(--link-color); text-decoration: underline; }
+    .faq-answer { padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-size: 1rem; color: #333; }
+    .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 10px; }
 
-    .merch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 2rem;}
-    .merch-item { border: 3px solid #000; padding: 10px; background: #f4f4f4; text-align: center; font-family: sans-serif; font-weight: bold;}
-    .merch-item img { width: 100%; height: 150px; object-fit: cover; border-bottom: 3px solid #000; margin-bottom: 10px; filter: grayscale(100%);}
-    .merch-item:hover img { filter: sepia(100%) hue-rotate(300deg) saturate(500%); } /* Pinker Hover Filter */
-    .price-tag { background: var(--neon-cyan); color: #000; padding: 5px; font-size: 1.5rem; display: block; margin: 10px 0; border: 2px solid #000;}
-
-    /* =========================================
-       8. FAQ AKKORDEON (Brutalismus Edition)
-       ========================================= */
-    .faq-container { margin-top: 2rem; font-family: sans-serif;}
-    .faq-item { border: 3px solid #000; margin-bottom: 10px; background: #fff;}
-    .faq-question { 
-      padding: 15px; font-weight: 900; font-size: 1.2rem; cursor: none; 
-      display: flex; justify-content: space-between; text-transform: uppercase;
-    }
-    .faq-question:hover { background: var(--neon-yellow); }
-    .faq-answer { padding: 0 15px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-weight: bold; background: #f4f4f4;}
-    .faq-item.active .faq-answer { max-height: 200px; padding: 15px; border-top: 3px solid #000; }
-    .faq-icon { font-size: 1.5rem; font-weight: 900; transition: transform 0.3s; }
-    .faq-item.active .faq-icon { transform: rotate(45deg); }
-
-    /* =========================================
-       9. MASSIVER FOOTER
-       ========================================= */
     .brutal-footer {
-      background: #000; color: #fff; padding: 100px 5% 50px 5%; border-top: 10px solid var(--neon-yellow);
-      text-align: center; position: relative; overflow: hidden;
+      background: #FFFFFF; color: #000; padding: 40px 5%; border-top: 3px double #000;
+      text-align: center; font-family: Arial, sans-serif;
     }
-    .footer-huge-text {
-      font-size: 12vw; font-weight: 900; line-height: 0.8; margin: 0; color: transparent;
-      -webkit-text-stroke: 2px #fff; text-transform: uppercase; letter-spacing: -5px; transition: color 0.3s;
-    }
-    .footer-huge-text:hover { color: var(--neon-pink); -webkit-text-stroke: 0px; }
-    .footer-links { margin-top: 50px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
-    .footer-links a { color: var(--neon-cyan); font-size: 1.5rem; font-weight: 800; text-decoration: none; text-transform: uppercase; border-bottom: 3px solid transparent; }
-    .footer-links a:hover { border-bottom: 3px solid var(--neon-cyan); color: #fff; }
-
+    .footer-huge-text { font-size: 2rem; font-weight: bold; margin-bottom: 10px; font-family: "Times New Roman", serif; }
+    .footer-links { margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; }
+    .footer-links a { color: var(--link-color); text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <div class="noise-bg"></div>
-  
-  <div class="custom-cursor" id="cursor"></div>
-
   <div id="preloader">
-    <div class="glitch-text" data-text="Waking up...">Waking up...</div>
-    <div class="loading-bar-container"><div class="loading-bar"></div></div>
+    <div class="loading-text">Loading Pension Bettina Corporate Data... Please Wait.</div>
   </div>
 
-  <nav class="navbar navbar-expand-lg fixed-top interactive">
+  <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a class="navbar-brand interactive" href="index.html">PENSION BETTINA</a>
+      <a class="navbar-brand" href="index.html">PENSION BETTINA INC.</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link interactive" href="index.html">Startseite</a></li>
-          <li class="nav-item"><a class="nav-link interactive" href="ueber-uns.html">Die BewohnerInnen</a></li>
-          <li class="nav-item"><a class="nav-link interactive" href="veranstaltungen.html">Veranstaltungen</a></li>
-          <li class="nav-item"><a class="nav-link interactive" href="merch.html">Merch</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Startseite</a></li>
+          <li class="nav-item"><a class="nav-link" href="ueber-uns.html">Die BewohnerInnen</a></li>
+          <li class="nav-item"><a class="nav-link" href="veranstaltungen.html">Veranstaltungen</a></li>
+          <li class="nav-item"><a class="nav-link" href="merch.html">Merch</a></li>
         </ul>
       </div>
     </div>
@@ -302,7 +200,7 @@
 
   <div class="marquee-container">
     <div class="marquee-text">
-      +++ PENSION BETTINA +++ SOLIDARISCHES WOHNPROJEKT +++ KAPITALISMUS ÜBERWINDEN +++ GEMEINSAM LEBEN UND FEIERN +++ PENSION BETTINA +++ SOLIDARISCHES WOHNPROJEKT +++ KAPITALISMUS ÜBERWINDEN +++ GEMEINSAM LEBEN UND FEIERN +++ 
+      WG-INDEX (WGI) 14,230.50 ▲ +2.4% &nbsp;&nbsp;|&nbsp;&nbsp; SOLIDARITÄT (SOL) 100.00 ▲ +5.0% &nbsp;&nbsp;|&nbsp;&nbsp; KAPITALISMUS (KAP) 12.30 ▼ -8.5% &nbsp;&nbsp;|&nbsp;&nbsp; PENSION BETTINA (PB) STRONG BUY &nbsp;&nbsp;|&nbsp;&nbsp; KÜFA-VEGAN (KVG) 8.50 ▲ +1.2% &nbsp;&nbsp;|&nbsp;&nbsp; WG-INDEX (WGI) 14,230.50 ▲ +2.4% 
     </div>
   </div>
 
@@ -322,167 +220,124 @@
 
   <section id="start">
     <div class="content-box reveal">
-      <h1>Haus<br>Projekt</h1>
-      <h2>📍 Kahlenberg - Der Überblick</h2>
-      <p>Hier startet unsere Reise. Wir holen uns die Stadt zurück. Das Wohnprojekt "Pension Bettina" hebt ab. Schnall dich an, es wird laut, solidarisch und ziemlich gut.</p>
-      <a href="#bewohner" class="btn-fancy interactive">Scroll Runter ↓</a>
+      <h1>Executive Summary</h1>
+      <h2>Standort: Kahlenberg | Abteilung: Überblick</h2>
+      <p>Hier startet unsere Unternehmung. Wir restrukturieren die Stadt von unten. Das Wohnprojekt "Pension Bettina" operiert profitfrei, aber mit hohem sozialen Return on Investment (ROI).</p>
+      <a href="#bewohner" class="btn-fancy">Weiterführende Informationen lesen</a>
     </div>
   </section>
 
   <section id="bewohner">
     <div class="content-box reveal">
-      <h1>Die<br>Crew</h1>
-      <h2>📍 Donauinsel - Basisdemokratie</h2>
-      <p>Ein bunter Haufen, der sich hier am Wasser sammelt, um gemeinsam Utopien zu bauen. Wir teilen Aufgaben, grillen und gestalten unseren Wohnraum abseits des Marktes.</p>
+      <h1>Board of Directors (Die Crew)</h1>
+      <h2>Standort: Donauinsel | Struktur: Basisdemokratie</h2>
+      <p>Ein Zusammenschluss von Individuen, der sich hier am Wasser sammelt, um gemeinsam Utopien zu bauen. Wir teilen Aufgaben, grillen und de-privatisieren unseren Wohnraum.</p>
       
       <div class="image-grid">
-        <img src="https://picsum.photos/300/300?random=1" alt="Bewohner 1" class="brutal-img interactive">
-        <img src="https://picsum.photos/300/300?random=2" alt="Bewohner 2" class="brutal-img interactive">
-        <img src="https://picsum.photos/300/300?random=3" alt="Bewohner 3" class="brutal-img interactive">
+        <img src="https://picsum.photos/300/200?random=1" alt="Meeting 1" class="brutal-img">
+        <img src="https://picsum.photos/300/200?random=2" alt="Meeting 2" class="brutal-img">
       </div>
       
-      <a href="ueber-uns.html" class="btn-fancy interactive">Alle kennenlernen</a>
+      <a href="ueber-uns.html" class="btn-fancy">Zum vollständigen Team-Verzeichnis</a>
     </div>
   </section>
 
   <section id="veranstaltungen">
     <div class="content-box reveal">
-      <h1>Live &<br>Laut</h1>
-      <h2>📍 Donaukanal - Urbane Praxis</h2>
-      <p>KüFas (Küche für alle), kleine Akustik-Konzerte im Hof und offene Plena. Wir sind kein geschlossener Club, sondern ein offener Raum fürs Grätzel.</p>
+      <h1>Jahreshauptversammlungen (Events)</h1>
+      <h2>Standort: Donaukanal | Abteilung: Urbane Praxis</h2>
+      <p>KüFas (Küche für alle), kleine Konzerte und offene Plena. Wir fungieren als offener Hub für die Nachbarschafts-Stakeholder.</p>
       
-      <ul style="list-style: none; padding: 0; font-family: sans-serif; font-weight: bold; margin-top: 20px;">
-        <li style="border-bottom: 3px solid #000; padding: 10px 0;">🎸 <strong>24. Mai:</strong> Hofkonzert & Soli-Tresen</li>
-        <li style="border-bottom: 3px solid #000; padding: 10px 0;">🥕 <strong>02. Juni:</strong> KüFa - Veganes Gulasch</li>
-        <li style="padding: 10px 0;">🛠 <strong>15. Juni:</strong> Offene Fahrradwerkstatt</li>
+      <ul style="font-family: Arial, sans-serif; font-size: 0.95rem; margin-top: 15px;">
+        <li><strong>24. Mai:</strong> Hofkonzert & Networking</li>
+        <li><strong>02. Juni:</strong> KüFa - Vegane Verpflegungsausgabe</li>
+        <li><strong>15. Juni:</strong> Reparatur-Workshop (Fahrräder)</li>
       </ul>
 
-      <a href="veranstaltungen.html" class="btn-fancy interactive">Zum Kalender</a>
+      <a href="veranstaltungen.html" class="btn-fancy">Terminkalender aufrufen</a>
     </div>
   </section>
 
   <section id="merch">
     <div class="content-box reveal">
-      <h1>Soli<br>Merch</h1>
-      <h2>📍 Lobau - Wilder Support</h2>
-      <p>Wir brauchen Kohle fürs Dach. Kauf dir Merch. Es sieht geil aus und unterstützt direkt unser Syndikats-Projekt.</p>
+      <h1>Merchandise & Support</h1>
+      <h2>Aktionärs-Informationen | Direktkredite</h2>
+      <p>Unterstützen Sie das Projekt durch den Erwerb von Merchandising-Artikeln. 100% der Gewinne fließen in die Instandhaltung der Immobilienwerte.</p>
       
-      <div class="merch-grid">
-        <div class="merch-item interactive">
-          <img src="https://picsum.photos/300/300?random=4" alt="Shirt">
-          <div>Punk-Shirt</div>
-          <span class="price-tag">20 €</span>
-        </div>
-        <div class="merch-item interactive">
-          <img src="https://picsum.photos/300/300?random=5" alt="Becher">
-          <div>Emaille-Tasse</div>
-          <span class="price-tag">12 €</span>
-        </div>
-      </div>
+      <ul style="font-family: Arial, sans-serif; font-size: 0.95rem;">
+        <li>Textil-Shirt (Schwarz) - 20.00 EUR</li>
+        <li>Kaffee-Behältnis (Emaille) - 12.00 EUR</li>
+      </ul>
 
-      <a href="merch.html" class="btn-fancy interactive">Alle Artikel</a>
-    </div>
-  </section>
-
-  <section id="schmecktbeibettina">
-    <div class="content-box reveal">
-      <h1>Food<br>Porn</h1>
-      <h2>📍 Alte Donau - Freiluftküche</h2>
-      <p>Vom veganen Sonntagsbrunch über das Einwecken von gerettetem Gemüse bis zum legendären WG-Dinner – wir kochen viel, laut und mit Knoblauch.</p>
-      
-      <div class="image-grid">
-        <img src="https://picsum.photos/300/300?random=6" alt="Food 1" class="brutal-img interactive">
-        <img src="https://picsum.photos/300/300?random=7" alt="Food 2" class="brutal-img interactive">
-      </div>
-
-      <a href="https://www.instagram.com/schmecktbeibettina" target="_blank" class="btn-fancy btn-insta interactive">Insta: @schmecktbeibettina</a>
+      <a href="merch.html" class="btn-fancy">Zum Bestellformular (Shop)</a>
     </div>
   </section>
 
   <section id="faq">
     <div class="content-box reveal">
-      <h1>Fragen?</h1>
-      <h2>📍 Hard Facts</h2>
-      <p>Bevor ihr uns Mails schreibt, lest kurz hier rein. So funktioniert das Zusammenleben bei Bettina.</p>
+      <h1>Frequently Asked Questions</h1>
+      <h2>Informationen für Interessenten</h2>
+      <p>Bitte konsultieren Sie diese Datenbank, bevor Sie den E-Mail-Support kontaktieren.</p>
       
       <div class="faq-container">
-        <div class="faq-item interactive">
-          <div class="faq-question">Habt ihr Zimmer frei? <span class="faq-icon">+</span></div>
-          <div class="faq-answer">Aktuell sind wir voll. Wenn etwas frei wird, posten wir es auf Insta und im Newsletter. Wir führen dann Kennenlern-Plena durch.</div>
+        <div class="faq-item">
+          <div class="faq-question">Frage 1: Habt ihr aktuell Zimmer frei?</div>
+          <div class="faq-answer">Aktuell verfügen wir über keine Vakanzen. Zukünftige Ausschreibungen werden über unsere offiziellen Kommunikationskanäle (Newsletter) publiziert.</div>
         </div>
-        <div class="faq-item interactive">
-          <div class="faq-question">Sind Hunde erlaubt? <span class="faq-icon">+</span></div>
-          <div class="faq-answer">Ja! Wir haben bereits zwei WG-Hunde. Es muss natürlich im Rudel passen, daher gibt es Probe-Schnüffeln.</div>
+        <div class="faq-item">
+          <div class="faq-question">Frage 2: Sind Haustiere gestattet?</div>
+          <div class="faq-answer">Grundsätzlich ja. Es bedarf jedoch einer vorherigen Evaluierung zur Kompatibilität mit den bereits ansässigen Tieren.</div>
         </div>
-        <div class="faq-item interactive">
-          <div class="faq-question">Wie ist das mit dem Geld? <span class="faq-icon">+</span></div>
-          <div class="faq-answer">Wir finanzieren uns über solidarische Direktkredite. Das Haus gehört dem Verein, niemand kann es jemals gewinnbringend verkaufen.</div>
+        <div class="faq-item">
+          <div class="faq-question">Frage 3: Wie finanzieren Sie das Objekt?</div>
+          <div class="faq-answer">Die Finanzierung erfolgt primär über nachrangige Direktkredite von Unterstützern (Crowd-Investing). Das Immobilien-Asset ist dem spekulativen Markt dauerhaft entzogen.</div>
         </div>
       </div>
     </div>
   </section>
 
   <footer class="brutal-footer reveal">
-    <div class="footer-huge-text interactive">BETTINA</div>
-    <div class="footer-huge-text interactive">BLEIBT!</div>
+    <div class="footer-huge-text">PENSION BETTINA INC.</div>
+    <div style="font-size: 0.85rem; color: #666;">Ein solidarisches Wohnprojekt. Kein Verkauf von Aktien möglich.</div>
     
     <div class="footer-links">
-      <a href="mailto:hallo@pension-bettina.at" class="interactive">Kontakt</a>
-      <a href="#" class="interactive">Impressum</a>
-      <a href="#" class="interactive">Direktkredite</a>
-      <a href="#" class="interactive">Newsletter</a>
+      <a href="mailto:hallo@pension-bettina.at">Kontakt (E-Mail)</a>
+      <a href="#">Impressum & Haftungsausschluss</a>
+      <a href="#">Broschüre zu Direktkrediten (PDF)</a>
     </div>
-    <p style="margin-top: 50px; font-family: sans-serif; font-weight: bold; color: #666;">© 2026 PENSION BETTINA - GEGEN DIE STADT DER REICHEN.</p>
+    <p style="margin-top: 30px; font-size: 0.8rem; color: #999;">© 2026 Pension Bettina. All rights reserved. Optimal viewed in Netscape Navigator or Internet Explorer 5.0.</p>
   </footer>
-
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // 1. PRELOADER LOGIK
+    // 1. PRELOADER LOGIK (Kurzer "Boot"-Screen)
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('preloader').classList.add('hide');
-      }, 2000); // Wartet 2 Sekunden für den coolen Effekt
+      }, 1000); 
     });
 
-    // 2. CUSTOM CURSOR LOGIK
-    const cursor = document.getElementById('cursor');
-    const interactives = document.querySelectorAll('.interactive, a, button');
-
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
-
-    // Cursor wird größer bei Hover über Links/Buttons
-    interactives.forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-    });
-
-    // 3. SCROLL REVEAL ANIMATION (Elemente ploppen auf beim Scrollen)
+    // 2. SCROLL REVEAL (Seriöses Einblenden)
     const revealElements = document.querySelectorAll('.reveal');
-    const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+    const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -20px 0px" };
 
     const revealOnScroll = new IntersectionObserver(function(entries, observer) {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('active');
-        observer.unobserve(entry.target); // Nur einmal animieren
+        observer.unobserve(entry.target); 
       });
     }, revealOptions);
 
     revealElements.forEach(el => revealOnScroll.observe(el));
 
-    // 4. FAQ AKKORDEON LOGIK
+    // 3. FAQ AKKORDEON LOGIK
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
       item.querySelector('.faq-question').addEventListener('click', () => {
-        // Schließe alle anderen
         faqItems.forEach(otherItem => {
           if (otherItem !== item) otherItem.classList.remove('active');
         });
-        // Toggle das geklickte
         item.classList.toggle('active');
       });
     });
